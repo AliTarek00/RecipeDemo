@@ -27,9 +27,9 @@ class RecipeNetworkManager: RecipeNetworkable
     
     // MARK: - Methods
     
-    func search(query: String, filter: String?, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)
+    func search(query: String, filter: String?, from: Int, to: Int, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)
     {
-        RecipeNetworkManager.provider.request(.search(query: query, filter: filter))
+        RecipeNetworkManager.provider.request(.search(query: query, filter: filter, from: from, to: to))
         { result in
             switch result
             {

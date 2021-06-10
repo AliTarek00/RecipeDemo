@@ -11,5 +11,5 @@ protocol RecipeNetworkable: class
 {
     // MARK: Methods
 
-    func search(query: String, filter: String?, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)    
+    func search(query: String, filter: String?, from: Int, to: Int, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)    
 }

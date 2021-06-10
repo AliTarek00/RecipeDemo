@@ -6,3 +6,40 @@
 //
 
 import Foundation
+
+protocol SearchPresenterProtocol : class
+{
+    func interactor(_ interactor: SearchInteractorProtocol, didFetch results: [Recipe])
+    func interactor(_ interactor: SearchInteractorProtocol, didFailWith error: Error)
+}
+
+class SearchPresenter
+{
+    // MARK: - Properties
+
+    weak var view: SearchViewProtocol?
+    var interactor: SearchInteractorProtocol?
+}
+
+// MARK: - extending SearchPresenter to implement it's protocol
+extension SearchPresenter: SearchPresenterProtocol
+{
+    
+    // MARK: - implement UI action handler
+    
+    func interactor(_ interactor: SearchInteractorProtocol, didFetch results: [Recipe])
+    {
+        let recipesViewModels = results.compactMap { (recipe) -> RecipeViewModel? in
+            let healthLabels = recipe.healthLabels.joined(separator: ", ")
+            let viewModel = RecipeViewModel(imageLink: recipe.image, title: recipe.label, source: recipe.source, healthLabels: healthLabels)
+            
+            return viewModel
+        }
+        view?.displayRecipes(recipes: recipesViewModels)
+    }
+    
+    func interactor(_ interactor: SearchInteractorProtocol, didFailWith error: Error)
+    {
+        view?.displayError(WithMessage: error.localizedDescription)
+    }
+}

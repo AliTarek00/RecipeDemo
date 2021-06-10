@@ -42,6 +42,9 @@
 		BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67BD26725E82004B105A /* SearchRouter.swift */; };
 		BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67C526725ED1004B105A /* SearchBuilder.swift */; };
 		BB7AA15E267273C6006872FD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA15D267273C6006872FD /* Helper.swift */; };
+		BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16326727974006872FD /* SearchTableViewCell.swift */; };
+		BB7AA16C26727B16006872FD /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16B26727B16006872FD /* RecipeViewModel.swift */; };
+		BB7AA18726729D1F006872FD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA18626729D1F006872FD /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,9 @@
 		BB2E67BD26725E82004B105A /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		BB2E67C526725ED1004B105A /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
 		BB7AA15D267273C6006872FD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		BB7AA16326727974006872FD /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		BB7AA16B26727B16006872FD /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
+		BB7AA18626729D1F006872FD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		D1F874FB60EA662CF88A7F76 /* Pods_RecipeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F13A03A351E21B38D4F42E45 /* Pods-RecipeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.release.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F266F15B38C080D8D00F5C1F /* Pods-RecipeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -246,10 +252,10 @@
 			isa = PBXGroup;
 			children = (
 				BB2E67CF26726162004B105A /* ViewController */,
+				BB7AA1622672794D006872FD /* View */,
 				BB2E67D026726173004B105A /* Interactor */,
 				BB2E67D12672617F004B105A /* Presenter */,
 				BB2E67D32672619B004B105A /* Router */,
-				BB2E67D226726188004B105A /* Worker */,
 				BB2E67C526725ED1004B105A /* SearchBuilder.swift */,
 			);
 			path = Search;
@@ -277,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2E6745267241A0004B105A /* Response */,
+				BB7AA18626729D1F006872FD /* Enums.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 			children = (
 				BB2E6754267245F1004B105A /* Hit.swift */,
 				BB2E674C2672433A004B105A /* Recipe.swift */,
+				BB7AA16B26727B16006872FD /* RecipeViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,19 +383,20 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		BB2E67D226726188004B105A /* Worker */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Worker;
-			sourceTree = "<group>";
-		};
 		BB2E67D32672619B004B105A /* Router */ = {
 			isa = PBXGroup;
 			children = (
 				BB2E67BD26725E82004B105A /* SearchRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		BB7AA1622672794D006872FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB7AA16326727974006872FD /* SearchTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BDCD4EBA98294A592A6BDAC5 /* Frameworks */ = {
@@ -651,6 +660,7 @@
 				BB2E6764267248E4004B105A /* DesignableView.swift in Sources */,
 				BB2E674D2672433A004B105A /* Recipe.swift in Sources */,
 				BB2E6747267241DD004B105A /* PagingResponse.swift in Sources */,
+				BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */,
 				BB2E677B26724A6D004B105A /* UIViewExtension.swift in Sources */,
 				BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */,
 				BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */,
@@ -659,8 +669,10 @@
 				BB2E672C26722DB3004B105A /* RecipeAPI.swift in Sources */,
 				BB2E6760267248E3004B105A /* DesignableImageView.swift in Sources */,
 				BB2E67B926725E4E004B105A /* SearchInteractor.swift in Sources */,
+				BB7AA18726729D1F006872FD /* Enums.swift in Sources */,
 				BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */,
 				BB2E673926722EC9004B105A /* RecipeNetworkProtocol.swift in Sources */,
+				BB7AA16C26727B16006872FD /* RecipeViewModel.swift in Sources */,
 				BB2E6762267248E4004B105A /* DesignableLabel.swift in Sources */,
 				BB2E677926724A6D004B105A /* UINavigationExtension.swift in Sources */,
 				BB2E6763267248E4004B105A /* DesignableButton.swift in Sources */,

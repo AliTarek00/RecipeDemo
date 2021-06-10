@@ -12,7 +12,7 @@ enum  RecipeAPI
     static private let appId = "0dca1f64"
     static private let appKey = "17abc68ea5ab0c94c958a4dd60e27c71"
     
-    case search(query: String, filter: String?)
+    case search(query: String, filter: String?, from: Int, to: Int)
 }
 
 extension RecipeAPI: TargetType
@@ -60,7 +60,7 @@ extension RecipeAPI: TargetType
     {
         switch self
         {
-        case let .search(query, filter):
+        case let .search(query, filter, from, to):
             var parameters = ["app_id": RecipeAPI.appId, "app_key": RecipeAPI.appKey, "q": query]
             if let healthFilter = filter
             {
