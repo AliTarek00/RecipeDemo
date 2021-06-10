@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ges-N5-Lsc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VY-AU-qeD" customClass="DesignableView" customModule="RecipeDemo" customModuleProvider="target">
-                                <rect key="frame" x="10" y="93" width="394" height="45"/>
+                                <rect key="frame" x="10" y="98" width="394" height="45"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter search Keyword" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-lM-7fh">
                                         <rect key="frame" x="10" y="5" width="374" height="35"/>
@@ -40,12 +40,113 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-zw-5eM">
+                                <rect key="frame" x="19.5" y="163" width="375" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-eD-7e2" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="5Ub-d4-fd8"/>
+                                            <constraint firstAttribute="width" constant="90" id="b8Y-hx-dFO"/>
+                                        </constraints>
+                                        <state key="normal" title="ALL"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkS-gx-U7L" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="0.0" width="90" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="fPN-Cv-0PZ"/>
+                                            <constraint firstAttribute="width" constant="90" id="sEx-tx-S0A"/>
+                                        </constraints>
+                                        <state key="normal" title="Low Sugar"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVz-vd-vv0" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
+                                        <rect key="frame" x="190" y="0.0" width="90" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="DM7-9h-T98"/>
+                                            <constraint firstAttribute="width" constant="90" id="cri-Nb-4oe"/>
+                                        </constraints>
+                                        <state key="normal" title="Keto"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsP-bS-PUD" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
+                                        <rect key="frame" x="285" y="0.0" width="90" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="CVi-BH-hsg"/>
+                                            <constraint firstAttribute="width" constant="90" id="K3H-vS-4Os"/>
+                                        </constraints>
+                                        <state key="normal" title="Vegan"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2eX-Fc-YIR">
+                                <rect key="frame" x="10" y="208" width="394" height="644"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipeCell" rowHeight="88" id="xLJ-2g-uiH">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="88"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xLJ-2g-uiH" id="JKm-I2-tvx">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="88"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cp7-1e-UwI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1VY-AU-qeD" firstAttribute="top" secondItem="cp7-1e-UwI" secondAttribute="top" constant="5" id="Bqh-Yf-ioT"/>
+                            <constraint firstItem="2eX-Fc-YIR" firstAttribute="leading" secondItem="cp7-1e-UwI" secondAttribute="leading" constant="10" id="1WI-Wa-7CS"/>
+                            <constraint firstItem="1VY-AU-qeD" firstAttribute="top" secondItem="cp7-1e-UwI" secondAttribute="top" constant="10" id="Bqh-Yf-ioT"/>
+                            <constraint firstItem="2eX-Fc-YIR" firstAttribute="top" secondItem="iH8-zw-5eM" secondAttribute="bottom" constant="10" id="EKb-Sq-69U"/>
                             <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="1VY-AU-qeD" secondAttribute="trailing" constant="10" id="Mmg-WS-axb"/>
+                            <constraint firstItem="cp7-1e-UwI" firstAttribute="bottom" secondItem="2eX-Fc-YIR" secondAttribute="bottom" constant="10" id="RF2-sT-kzH"/>
+                            <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="2eX-Fc-YIR" secondAttribute="trailing" constant="10" id="Tmv-TV-Z3v"/>
+                            <constraint firstItem="iH8-zw-5eM" firstAttribute="centerX" secondItem="72N-Wn-Rtj" secondAttribute="centerX" id="kxQ-aQ-2Mu"/>
+                            <constraint firstItem="iH8-zw-5eM" firstAttribute="top" secondItem="1VY-AU-qeD" secondAttribute="bottom" constant="20" id="wmk-Ih-mub"/>
                             <constraint firstItem="1VY-AU-qeD" firstAttribute="leading" secondItem="72N-Wn-Rtj" secondAttribute="leading" constant="10" id="wzW-nr-Nt2"/>
                         </constraints>
                     </view>
@@ -74,6 +175,20 @@
             <point key="canvasLocation" x="71.014492753623188" y="105.80357142857143"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="EkS-gx-U7L">
+            <size key="intrinsicContentSize" width="72" height="30"/>
+        </designable>
+        <designable name="J7a-eD-7e2">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="QsP-bS-PUD">
+            <size key="intrinsicContentSize" width="43" height="30"/>
+        </designable>
+        <designable name="lVz-vd-vv0">
+            <size key="intrinsicContentSize" width="32" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

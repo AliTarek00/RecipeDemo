@@ -41,6 +41,7 @@
 		BB2E67B926725E4E004B105A /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67B826725E4E004B105A /* SearchInteractor.swift */; };
 		BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67BD26725E82004B105A /* SearchRouter.swift */; };
 		BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67C526725ED1004B105A /* SearchBuilder.swift */; };
+		BB7AA15E267273C6006872FD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA15D267273C6006872FD /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		BB2E67B826725E4E004B105A /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		BB2E67BD26725E82004B105A /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		BB2E67C526725ED1004B105A /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
+		BB7AA15D267273C6006872FD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		D1F874FB60EA662CF88A7F76 /* Pods_RecipeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F13A03A351E21B38D4F42E45 /* Pods-RecipeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.release.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F266F15B38C080D8D00F5C1F /* Pods-RecipeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 		BB2E67692672497A004B105A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BB7AA15D267273C6006872FD /* Helper.swift */,
 				BB2E675926724875004B105A /* View */,
 				BB2E676A26724985004B105A /* Extensions */,
 			);
@@ -640,6 +643,7 @@
 				BB2E67B426725DEE004B105A /* SearchPresenter.swift in Sources */,
 				BB2E6755267245F1004B105A /* Hit.swift in Sources */,
 				BB2E677A26724A6D004B105A /* UIImageViewExtension.swift in Sources */,
+				BB7AA15E267273C6006872FD /* Helper.swift in Sources */,
 				BB2E66C126721B67004B105A /* AppDelegate.swift in Sources */,
 				BB2E677C26724A6D004B105A /* UIViewControllerExtension.swift in Sources */,
 				BB2E6765267248E4004B105A /* DesignableTextField.swift in Sources */,
