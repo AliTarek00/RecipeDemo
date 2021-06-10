@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Recipe Search-->
+        <scene sceneID="XvK-oR-T7K">
+            <objects>
+                <viewController id="1uH-K6-pq1" customClass="SearchViewController" customModule="RecipeDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="72N-Wn-Rtj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VY-AU-qeD" customClass="DesignableView" customModule="RecipeDemo" customModuleProvider="target">
+                                <rect key="frame" x="10" y="93" width="394" height="45"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter search Keyword" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-lM-7fh">
+                                        <rect key="frame" x="10" y="5" width="374" height="35"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="yes" smartInsertDeleteType="yes"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xaT-lM-7fh" firstAttribute="leading" secondItem="1VY-AU-qeD" secondAttribute="leading" constant="10" id="7Rb-rO-JD1"/>
+                                    <constraint firstAttribute="trailing" secondItem="xaT-lM-7fh" secondAttribute="trailing" constant="10" id="Gje-fR-MFg"/>
+                                    <constraint firstAttribute="bottom" secondItem="xaT-lM-7fh" secondAttribute="bottom" constant="5" id="Qtc-Cg-oDy"/>
+                                    <constraint firstItem="xaT-lM-7fh" firstAttribute="top" secondItem="1VY-AU-qeD" secondAttribute="top" constant="5" id="Re5-g1-uF5"/>
+                                    <constraint firstAttribute="height" constant="45" id="dm9-lg-m5o"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cp7-1e-UwI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1VY-AU-qeD" firstAttribute="top" secondItem="cp7-1e-UwI" secondAttribute="top" constant="5" id="Bqh-Yf-ioT"/>
+                            <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="1VY-AU-qeD" secondAttribute="trailing" constant="10" id="Mmg-WS-axb"/>
+                            <constraint firstItem="1VY-AU-qeD" firstAttribute="leading" secondItem="72N-Wn-Rtj" secondAttribute="leading" constant="10" id="wzW-nr-Nt2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Recipe Search" id="qvQ-uk-8ml"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-UW-Drm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="981.15942028985512" y="105.80357142857143"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fpw-Qp-3p1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ges-N5-Lsc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Jz-Mv-7ac">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1uH-K6-pq1" kind="relationship" relationship="rootViewController" id="tqb-RX-UpV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="93a-6Z-xdi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="71.014492753623188" y="105.80357142857143"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
