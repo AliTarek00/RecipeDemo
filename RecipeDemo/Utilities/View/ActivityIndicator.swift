@@ -17,7 +17,7 @@ class ActivityIndicator
     {
         DispatchQueue.main.async
         {
-            guard let view = UIApplication.shared.keyWindow?.rootViewController?.view else {
+            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else {
                 print("can not get current view ")
                 return
             }
@@ -37,7 +37,7 @@ class ActivityIndicator
     {
         DispatchQueue.main.async
         {
-            guard let view = UIApplication.shared.keyWindow?.rootViewController?.view else
+            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else
             {
                 print("can not get current view ")
                 return

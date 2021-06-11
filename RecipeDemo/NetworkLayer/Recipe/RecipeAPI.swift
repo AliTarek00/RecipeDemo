@@ -8,10 +8,7 @@
 import Moya
 
 enum  RecipeAPI
-{
-    static private let appId = "0dca1f64"
-    static private let appKey = "17abc68ea5ab0c94c958a4dd60e27c71"
-    
+{    
     case search(query: String, filter: String?, from: Int, to: Int)
 }
 
@@ -53,7 +50,7 @@ extension RecipeAPI: TargetType
     
     var validationType: ValidationType
     {
-      return .successCodes
+        return .successCodes
     }
     
     var task: Task
@@ -61,7 +58,7 @@ extension RecipeAPI: TargetType
         switch self
         {
         case let .search(query, filter, from, to):
-            var parameters = ["app_id": RecipeAPI.appId, "app_key": RecipeAPI.appKey, "q": query]
+            var parameters = ["app_id": AppAuthKeys.appId, "app_key": AppAuthKeys.appKey, "q": query, "from": from, "to": to] as [String : Any]
             if let healthFilter = filter
             {
                 parameters["health"] = healthFilter

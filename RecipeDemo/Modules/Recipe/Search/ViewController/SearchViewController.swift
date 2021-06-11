@@ -67,21 +67,27 @@ class SearchViewController: UIViewController
     
     @IBAction func AllAction(_ sender: Any)
     {
-        interactor?.fetchSearchResults(query: "chiken", filter: nil, from: <#T##Int#>, to: <#T##Int#>)
+        let searchKeyword = searchBar.text ?? ""
+        interactor?.fetchSearchResults(query: searchKeyword, filter: .all)
     }
     
     @IBAction func lowSugarAction(_ sender: Any)
     {
+        let searchKeyword = searchBar.text ?? ""
+        interactor?.fetchSearchResults(query: searchKeyword, filter: .lowSugar)
     }
     
     @IBAction func ketoAction(_ sender: Any)
     {
+        let searchKeyword = searchBar.text ?? ""
+        interactor?.fetchSearchResults(query: searchKeyword, filter: .keto)
     }
     
     @IBAction func veganAction(_ sender: Any)
     {
+        let searchKeyword = searchBar.text ?? ""
+        interactor?.fetchSearchResults(query: searchKeyword, filter: .vegan)
     }
-    
     
     // MARK: - Navigation
 
@@ -92,46 +98,4 @@ class SearchViewController: UIViewController
     
 }
 
-// MARK: - UITableViewDelegate
 
-extension SearchViewController: SearchViewProtocol
-{
-    func displayRecipes(recipes: [RecipeViewModel])
-    {
-        self.recipes = recipes
-    }
-    
-    func displayError(WithMessage message: String)
-    {
-        Helper.instance.showAlert(title: "", message: message, ViewController: self)
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension SearchViewController: UITableViewDelegate
-{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension SearchViewController: UITableViewDataSource
-{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return recipes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! SearchTableViewCell
-        
-        let recipeViewModel = recipes[indexPath.row]
-        cell.configure(recipeViewModel)
-        
-        return cell
-    }
-}

@@ -45,6 +45,7 @@
 		BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16326727974006872FD /* SearchTableViewCell.swift */; };
 		BB7AA16C26727B16006872FD /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16B26727B16006872FD /* RecipeViewModel.swift */; };
 		BB7AA18726729D1F006872FD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA18626729D1F006872FD /* Enums.swift */; };
+		BBD1CEF42673A8D8002E5C05 /* SearchVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		BB7AA16326727974006872FD /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		BB7AA16B26727B16006872FD /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		BB7AA18626729D1F006872FD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVCExtensions.swift; sourceTree = "<group>"; };
 		D1F874FB60EA662CF88A7F76 /* Pods_RecipeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F13A03A351E21B38D4F42E45 /* Pods-RecipeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.release.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F266F15B38C080D8D00F5C1F /* Pods-RecipeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2E67AE26725DD3004B105A /* SearchViewController.swift */,
+				BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				BB2E677926724A6D004B105A /* UINavigationExtension.swift in Sources */,
 				BB2E6763267248E4004B105A /* DesignableButton.swift in Sources */,
 				BB2E676E26724A58004B105A /* CodableExtension.swift in Sources */,
+				BBD1CEF42673A8D8002E5C05 /* SearchVCExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
