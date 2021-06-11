@@ -6,3 +6,20 @@
 //
 
 import Foundation
+
+class SearchBuilder {
+
+    class func buildModule(arroundView view:SearchViewProtocol) {
+        
+        //MARK: Initialise components.
+        let presenter = SearchPresenter()
+        let interactor = SearchInteractor(networkManager: RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorker())
+        let router = SearchRouter()
+        
+        //MARK: link VIP components.
+        view.interactor = interactor
+        view.router = router
+        presenter.view = view
+        interactor.presenter = presenter
+    }
+}

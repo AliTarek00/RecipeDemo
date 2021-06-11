@@ -18,6 +18,7 @@ enum SearchError: Error
 {
     case emptySearch
     case invalidSearchKeyowrd
+    case emptySearchSuggestion
 }
 
 extension SearchError: LocalizedError
@@ -31,6 +32,9 @@ extension SearchError: LocalizedError
             
         case .invalidSearchKeyowrd:
             return NSLocalizedString("Plese Enter Valid Search Keyword", comment: "")
+            
+        case .emptySearchSuggestion:
+            return NSLocalizedString("empty search suggestion", comment: "")
         }
     }
 }

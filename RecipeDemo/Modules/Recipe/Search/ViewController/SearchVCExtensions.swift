@@ -20,7 +20,7 @@ extension SearchViewController: UITextFieldDelegate
             textField.resignFirstResponder()
             return true
         }
-        interactor?.fetchSearchResults(query: searchKeyword, filter: .all)
+        interactor?.fetchSearchResults(query: searchKeyword, filter: nil)
         textField.resignFirstResponder()
         return true
     }
@@ -30,9 +30,14 @@ extension SearchViewController: UITextFieldDelegate
 
 extension SearchViewController: SearchViewProtocol
 {
-    func displayRecipes(recipes: [RecipeViewModel])
+    func displaySearchResults(_ recipes: [RecipeViewModel])
     {
         self.recipes = recipes
+    }
+    
+    func displaySearchSuggestions(_ suggestions: [String])
+    {
+        searchBar.filterStrings(suggestions)
     }
     
     func displayError(WithMessage message: String)
@@ -47,6 +52,16 @@ extension SearchViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        guard recipes.count - indexPath.row == 2 else {
+            return
+        }
+        interactor?.getNextPageForSearchResults()
     }
 }
 

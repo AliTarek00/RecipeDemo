@@ -9,19 +9,25 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
+        if let rootNavigationController = application.windows.first?.rootViewController as? UINavigationController,
+           let searchView = rootNavigationController.viewControllers.first as? SearchViewController
+        {
+            SearchBuilder.buildModule(arroundView: searchView)
+        }
+        
         return true
     }
     
-    @available(iOS 12.0, *)
+    @available(iOS 11.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool
     {
         return false
     }
-
+    
 }
 

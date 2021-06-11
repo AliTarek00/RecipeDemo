@@ -46,6 +46,8 @@
 		BB7AA16C26727B16006872FD /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16B26727B16006872FD /* RecipeViewModel.swift */; };
 		BB7AA18726729D1F006872FD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA18626729D1F006872FD /* Enums.swift */; };
 		BBD1CEF42673A8D8002E5C05 /* SearchVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */; };
+		BBD1CEFA2673BA84002E5C05 /* SearchSuggestionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */; };
+		BBD1CF022673C987002E5C05 /* SearchSuggestionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		BB7AA16B26727B16006872FD /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		BB7AA18626729D1F006872FD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVCExtensions.swift; sourceTree = "<group>"; };
+		BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionWorker.swift; sourceTree = "<group>"; };
+		BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionArray.swift; sourceTree = "<group>"; };
 		D1F874FB60EA662CF88A7F76 /* Pods_RecipeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F13A03A351E21B38D4F42E45 /* Pods-RecipeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.release.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F266F15B38C080D8D00F5C1F /* Pods-RecipeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				BB2E67D026726173004B105A /* Interactor */,
 				BB2E67D12672617F004B105A /* Presenter */,
 				BB2E67D32672619B004B105A /* Router */,
+				BBD1CEF82673B9EB002E5C05 /* Worker */,
 				BB2E67C526725ED1004B105A /* SearchBuilder.swift */,
 			);
 			path = Search;
@@ -325,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				BB7AA15D267273C6006872FD /* Helper.swift */,
+				BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */,
 				BB2E675926724875004B105A /* View */,
 				BB2E676A26724985004B105A /* Extensions */,
 			);
@@ -400,6 +406,14 @@
 				BB7AA16326727974006872FD /* SearchTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BBD1CEF82673B9EB002E5C05 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */,
+			);
+			path = Worker;
 			sourceTree = "<group>";
 		};
 		BDCD4EBA98294A592A6BDAC5 /* Frameworks */ = {
@@ -665,6 +679,8 @@
 				BB2E6747267241DD004B105A /* PagingResponse.swift in Sources */,
 				BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */,
 				BB2E677B26724A6D004B105A /* UIViewExtension.swift in Sources */,
+				BBD1CEFA2673BA84002E5C05 /* SearchSuggestionWorker.swift in Sources */,
+				BBD1CF022673C987002E5C05 /* SearchSuggestionArray.swift in Sources */,
 				BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */,
 				BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */,
 				BB2E672626722D80004B105A /* VerbosePlugin.swift in Sources */,
@@ -852,7 +868,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2SBZN5MS44;
 				INFOPLIST_FILE = RecipeDemo/General/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -873,7 +889,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2SBZN5MS44;
 				INFOPLIST_FILE = RecipeDemo/General/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

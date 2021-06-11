@@ -14,7 +14,9 @@ protocol SearchViewProtocol: class
     var router: SearchRouterProtocol? { get set }
 
     // Update UI with value returned.
-    func displayRecipes(recipes: [RecipeViewModel])
+    func displaySearchResults(_ recipes: [RecipeViewModel])
+    func displaySearchSuggestions(_ suggestions: [String])
+
     func displayError(WithMessage message: String)
     //func displayEmptyLabel()
 }
@@ -52,12 +54,19 @@ class SearchViewController: UIViewController
     
     private func setup()
     {
+        reultsTableView.isHidden = true
+        searchBar.delegate = self
+        interactor?.getSearchSuggestions()
     }
  
     // MARK:- Public Methods
     
     func refreshTableView()
     {
+       if reultsTableView.isHidden
+       {
+        reultsTableView.isHidden = false
+       }
         reultsTableView.reloadData()
         view.layoutIfNeeded()
     }
@@ -68,7 +77,7 @@ class SearchViewController: UIViewController
     @IBAction func AllAction(_ sender: Any)
     {
         let searchKeyword = searchBar.text ?? ""
-        interactor?.fetchSearchResults(query: searchKeyword, filter: .all)
+        interactor?.fetchSearchResults(query: searchKeyword, filter: nil)
     }
     
     @IBAction func lowSugarAction(_ sender: Any)
