@@ -13,7 +13,7 @@ class SearchBuilder {
         
         //MARK: Initialise components.
         let presenter = SearchPresenter()
-        let interactor = SearchInteractor(networkManager: RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorker())
+        let interactor = SearchInteractor(searchAPIWorker: SearchAPIWorker(networkManager: RecipeNetworkManager()), suggestionsWorker: SearchSuggestionWorker())
         let router = SearchRouter()
         
         //MARK: link VIP components.

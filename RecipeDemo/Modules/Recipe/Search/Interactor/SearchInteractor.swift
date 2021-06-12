@@ -9,9 +9,10 @@ import Foundation
 
 protocol SearchInteractorProtocol
 {
-    func fetchSearchResults(query: String, filter: HealthFilter?)
-    func getNextPageForSearchResults()
-    func getSearchSuggestions()
+    func search(WithKeyowrd query: String)
+    func filterResults(WithFilter filter: HealthFilter)
+    func fetchNextPageForSearchResults()
+    func fetchSearchSuggestions()
 }
 
 class SearchInteractor: SearchInteractorProtocol
@@ -25,18 +26,18 @@ class SearchInteractor: SearchInteractorProtocol
     private lazy var hits: [Hit] = [Hit]()
     private lazy var suggestions: [String] = [String]()
     
-    lazy var isLoading = false
     lazy var isAPaginationRequest = false
     lazy var lastSearchKeyword: String = ""
     var lastSearchFilter: HealthFilter?
     
-    private let networkManager: RecipeNetworkable
+    private let searchAPIWorker: SearchAPIWorkerProtocol
     private let suggestionsWorker: SearchSuggestionWorkerProtocol
+
     var presenter: SearchPresenterProtocol?
     
-    required init(networkManager: RecipeNetworkable, suggestionsWorker: SearchSuggestionWorkerProtocol)
+    required init(searchAPIWorker: SearchAPIWorkerProtocol, suggestionsWorker: SearchSuggestionWorkerProtocol)
     {
-        self.networkManager = networkManager
+        self.searchAPIWorker = searchAPIWorker
         self.suggestionsWorker = suggestionsWorker
         self.fetchSearchSuggestions()
     }
@@ -48,21 +49,15 @@ class SearchInteractor: SearchInteractorProtocol
     
     // MARK: - Methods
     
-    func fetchSearchResults(query: String, filter: HealthFilter? = nil)
+    func search(WithKeyowrd query: String)
     {
         let searchKeyword = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard searchKeyword != lastSearchKeyword else { return }
         
-        guard (searchKeyword != lastSearchKeyword && !isAPaginationRequest) else
-        {
-            return
-        }
-        
-        let filterValue = filter == .all ? nil : filter?.rawValue
-        isLoading = true
         resetPaginationProperties()
         suggestions = suggestionsWorker.addNewSuggestion(searchKeyword)
         
-        networkManager.search(query: searchKeyword, filter: filterValue, from: from, to: to)
+        searchAPIWorker.fetchSearchResults(query: searchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
         { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
             
             switch result
@@ -74,28 +69,60 @@ class SearchInteractor: SearchInteractorProtocol
             case .failure(let error):
                 presenter?.interactor(self, didFailWith: error)
             }
-            isLoading = false
             isAPaginationRequest = false
-            lastSearchKeyword = query
+            lastSearchKeyword = searchKeyword
+        }
+    }
+    
+    func filterResults(WithFilter filter: HealthFilter)
+    {
+        searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: filter.rawValue, from: from, to: to)
+        { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
+            
+            switch result
+            {
+            case .success(let response):
+                setInteractorProperties(response: response)
+                extractRecipes(fromHits: response.data)
+                
+            case .failure(let error):
+                presenter?.interactor(self, didFailWith: error)
+            }
+            isAPaginationRequest = false
             lastSearchFilter = filter
         }
     }
     
-    func getNextPageForSearchResults()
+    func fetchNextPageForSearchResults()
     {
-        guard hasMore, !isLoading, from + to < totalItems else { return }
-        self.from = self.to + 1
-        self.to = from + 10
+        guard hasMore, !searchAPIWorker.isLoading, from + to < totalItems else { return }
+        from = to + 1
+        to = from + 10
         isAPaginationRequest = true
-        fetchSearchResults(query: lastSearchKeyword, filter: lastSearchFilter)
+
+        searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
+        { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
+            
+            switch result
+            {
+            case .success(let response):
+                setInteractorProperties(response: response)
+                extractRecipes(fromHits: response.data)
+                
+            case .failure:
+                print("failure in pagination")
+                break
+            }
+            isAPaginationRequest = false
+        }
     }
     
-    func getSearchSuggestions()
+    func fetchSearchSuggestions()
     {
         presenter?.interactor(self, didFetchSearchSuggestions: suggestions)
     }
     
-    private func fetchSearchSuggestions()
+    private func getSearchSuggestions()
     {
         suggestionsWorker.fetchSearchSuggestions
         { [unowned self] (result: Result<[String], Error>) in

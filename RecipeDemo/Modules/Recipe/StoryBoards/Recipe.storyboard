@@ -41,16 +41,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-zw-5eM">
-                                <rect key="frame" x="19.5" y="163" width="375" height="35"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-zw-5eM">
+                                <rect key="frame" x="10" y="163" width="394" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-eD-7e2" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="5Ub-d4-fd8"/>
-                                            <constraint firstAttribute="width" constant="90" id="b8Y-hx-dFO"/>
                                         </constraints>
-                                        <state key="normal" title="ALL"/>
+                                        <state key="normal" title="ALL">
+                                            <color key="titleColor" red="0.1764705882" green="0.83921568629999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="4"/>
@@ -67,12 +68,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkS-gx-U7L" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
-                                        <rect key="frame" x="95" y="0.0" width="90" height="35"/>
+                                        <rect key="frame" x="100" y="0.0" width="94.5" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="fPN-Cv-0PZ"/>
-                                            <constraint firstAttribute="width" constant="90" id="sEx-tx-S0A"/>
                                         </constraints>
-                                        <state key="normal" title="Low Sugar"/>
+                                        <state key="normal" title="Low Sugar">
+                                            <color key="titleColor" red="0.1764705882" green="0.83921568629999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="4"/>
@@ -89,12 +91,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVz-vd-vv0" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
-                                        <rect key="frame" x="190" y="0.0" width="90" height="35"/>
+                                        <rect key="frame" x="199.5" y="0.0" width="95" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="DM7-9h-T98"/>
-                                            <constraint firstAttribute="width" constant="90" id="cri-Nb-4oe"/>
                                         </constraints>
-                                        <state key="normal" title="Keto"/>
+                                        <state key="normal" title="Keto">
+                                            <color key="titleColor" red="0.1764705882" green="0.83921568629999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="4"/>
@@ -111,12 +114,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsP-bS-PUD" customClass="DesignableButton" customModule="RecipeDemo" customModuleProvider="target">
-                                        <rect key="frame" x="285" y="0.0" width="90" height="35"/>
+                                        <rect key="frame" x="299.5" y="0.0" width="94.5" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="CVi-BH-hsg"/>
-                                            <constraint firstAttribute="width" constant="90" id="K3H-vS-4Os"/>
                                         </constraints>
-                                        <state key="normal" title="Vegan"/>
+                                        <state key="normal" title="Vegan">
+                                            <color key="titleColor" red="0.1764705882352941" green="0.83921568627450982" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="4"/>
@@ -148,15 +152,20 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNP-92-93q" customClass="DesignableView" customModule="RecipeDemo" customModuleProvider="target">
                                                     <rect key="frame" x="5" y="5" width="384" height="140"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9b-gi-DCg">
-                                                            <rect key="frame" x="10" y="20" width="100" height="100"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9b-gi-DCg" customClass="DesignableImageView" customModule="RecipeDemo" customModuleProvider="target">
+                                                            <rect key="frame" x="5" y="20" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="6KC-Xe-Xrx"/>
                                                                 <constraint firstAttribute="width" constant="100" id="81V-Q2-r7y"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wz3-m6-D54">
-                                                            <rect key="frame" x="120" y="20" width="254" height="15"/>
+                                                            <rect key="frame" x="115" y="20" width="259" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="gBf-Ew-6gy"/>
                                                             </constraints>
@@ -165,7 +174,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62C-tQ-elY">
-                                                            <rect key="frame" x="120" y="43" width="254" height="15"/>
+                                                            <rect key="frame" x="115" y="43" width="259" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="9v9-jv-fh4"/>
                                                             </constraints>
@@ -174,10 +183,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Labels" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDI-Ef-H8t">
-                                                            <rect key="frame" x="120" y="66" width="254" height="15"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="15" id="L04-iJ-EZ4"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="115" y="66" width="259" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -185,7 +191,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="A9b-gi-DCg" firstAttribute="leading" secondItem="XNP-92-93q" secondAttribute="leading" constant="10" id="3jS-bm-afx"/>
+                                                        <constraint firstItem="A9b-gi-DCg" firstAttribute="leading" secondItem="XNP-92-93q" secondAttribute="leading" constant="5" id="3jS-bm-afx"/>
                                                         <constraint firstItem="XDI-Ef-H8t" firstAttribute="leading" secondItem="62C-tQ-elY" secondAttribute="leading" id="DH3-wQ-4sw"/>
                                                         <constraint firstItem="62C-tQ-elY" firstAttribute="trailing" secondItem="wz3-m6-D54" secondAttribute="trailing" id="E1g-ec-rep"/>
                                                         <constraint firstItem="wz3-m6-D54" firstAttribute="leading" secondItem="A9b-gi-DCg" secondAttribute="trailing" constant="10" id="HI5-8O-xC8"/>
@@ -196,7 +202,7 @@
                                                         <constraint firstItem="A9b-gi-DCg" firstAttribute="centerY" secondItem="XNP-92-93q" secondAttribute="centerY" id="Y0C-Ur-Wmo"/>
                                                         <constraint firstItem="62C-tQ-elY" firstAttribute="leading" secondItem="wz3-m6-D54" secondAttribute="leading" id="qrf-g0-zKq"/>
                                                         <constraint firstItem="XDI-Ef-H8t" firstAttribute="trailing" secondItem="62C-tQ-elY" secondAttribute="trailing" id="sbr-oi-ntd"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XDI-Ef-H8t" secondAttribute="bottom" constant="15" id="tXC-o4-wwy"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XDI-Ef-H8t" secondAttribute="bottom" constant="5" id="tXC-o4-wwy"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -235,21 +241,27 @@
                         <viewLayoutGuide key="safeArea" id="cp7-1e-UwI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="iH8-zw-5eM" firstAttribute="leading" secondItem="cp7-1e-UwI" secondAttribute="leading" constant="10" id="0Wp-Bd-NKA"/>
                             <constraint firstItem="2eX-Fc-YIR" firstAttribute="leading" secondItem="cp7-1e-UwI" secondAttribute="leading" constant="10" id="1WI-Wa-7CS"/>
                             <constraint firstItem="1VY-AU-qeD" firstAttribute="top" secondItem="cp7-1e-UwI" secondAttribute="top" constant="10" id="Bqh-Yf-ioT"/>
                             <constraint firstItem="2eX-Fc-YIR" firstAttribute="top" secondItem="iH8-zw-5eM" secondAttribute="bottom" constant="10" id="EKb-Sq-69U"/>
                             <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="1VY-AU-qeD" secondAttribute="trailing" constant="10" id="Mmg-WS-axb"/>
                             <constraint firstItem="cp7-1e-UwI" firstAttribute="bottom" secondItem="2eX-Fc-YIR" secondAttribute="bottom" constant="10" id="RF2-sT-kzH"/>
                             <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="2eX-Fc-YIR" secondAttribute="trailing" constant="10" id="Tmv-TV-Z3v"/>
-                            <constraint firstItem="iH8-zw-5eM" firstAttribute="centerX" secondItem="72N-Wn-Rtj" secondAttribute="centerX" id="kxQ-aQ-2Mu"/>
+                            <constraint firstItem="cp7-1e-UwI" firstAttribute="trailing" secondItem="iH8-zw-5eM" secondAttribute="trailing" constant="10" id="i5G-rG-km7"/>
                             <constraint firstItem="iH8-zw-5eM" firstAttribute="top" secondItem="1VY-AU-qeD" secondAttribute="bottom" constant="20" id="wmk-Ih-mub"/>
                             <constraint firstItem="1VY-AU-qeD" firstAttribute="leading" secondItem="72N-Wn-Rtj" secondAttribute="leading" constant="10" id="wzW-nr-Nt2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe Search" id="qvQ-uk-8ml"/>
                     <connections>
-                        <outlet property="reultsTableView" destination="2eX-Fc-YIR" id="Lza-iz-hvV"/>
+                        <outlet property="allFiletrButton" destination="J7a-eD-7e2" id="o6A-ZC-OHV"/>
+                        <outlet property="filterStack" destination="iH8-zw-5eM" id="Qlv-ah-OVE"/>
+                        <outlet property="ketoFiletrButton" destination="lVz-vd-vv0" id="e68-Ud-O3n"/>
+                        <outlet property="lowSugarFiletrButton" destination="EkS-gx-U7L" id="tZP-My-QL4"/>
+                        <outlet property="resultsTableView" destination="2eX-Fc-YIR" id="4jD-d0-8gr"/>
                         <outlet property="searchBar" destination="xaT-lM-7fh" id="OQX-Nv-Vcl"/>
+                        <outlet property="veganFiletrButton" destination="QsP-bS-PUD" id="ZkG-gj-EEF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-UW-Drm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

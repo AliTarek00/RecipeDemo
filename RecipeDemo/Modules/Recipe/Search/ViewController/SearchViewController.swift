@@ -12,22 +12,29 @@ protocol SearchViewProtocol: class
 {
     var interactor: SearchInteractorProtocol? { get set }
     var router: SearchRouterProtocol? { get set }
-
+    
     // Update UI with value returned.
     func displaySearchResults(_ recipes: [RecipeViewModel])
     func displaySearchSuggestions(_ suggestions: [String])
-
+    
     func displayError(WithMessage message: String)
     //func displayEmptyLabel()
 }
 
 class SearchViewController: UIViewController
 {
-
+    
     // MARK:- Outlets
     
     @IBOutlet weak var searchBar: SearchTextField!
-    @IBOutlet weak var reultsTableView: UITableView!
+    @IBOutlet weak var resultsTableView: UITableView!
+    
+    @IBOutlet weak var filterStack: UIStackView!
+    
+    @IBOutlet weak var allFiletrButton: UIButton!
+    @IBOutlet weak var lowSugarFiletrButton: UIButton!
+    @IBOutlet weak var ketoFiletrButton: UIButton!
+    @IBOutlet weak var veganFiletrButton: UIButton!
     
     // MARK:- Properties
     
@@ -41,7 +48,7 @@ class SearchViewController: UIViewController
     
     var interactor: SearchInteractorProtocol?
     var router: SearchRouterProtocol?
-       
+    
     // MARK: View Controller Life Cycle
     
     override func viewDidLoad()
@@ -54,53 +61,90 @@ class SearchViewController: UIViewController
     
     private func setup()
     {
-        reultsTableView.isHidden = true
+        setSelectedViewAppearnce(For: allFiletrButton)
+        configureResultsView(hide: true)
         searchBar.delegate = self
-        interactor?.getSearchSuggestions()
+        
+        interactor?.fetchSearchSuggestions()
     }
- 
+    
     // MARK:- Public Methods
+    
+    // MARK:- Helper Methods
+    
+    private func setSelectedViewAppearnce(For button: UIButton)
+    {
+        button.backgroundColor = .appGreen
+        button.setTitleColor(.white, for: .normal)
+    }
+    
+    private func setUnSelectedViewAppearnce(For button: UIButton)
+    {
+        button.backgroundColor = .white
+        button.setTitleColor(.appGreen, for: .normal)
+    }
+    
+    func configureResultsView(hide: Bool)
+    {
+        filterStack.isHidden = hide
+        resultsTableView.isHidden = hide
+    }
     
     func refreshTableView()
     {
-       if reultsTableView.isHidden
-       {
-        reultsTableView.isHidden = false
-       }
-        reultsTableView.reloadData()
+        if resultsTableView.isHidden, filterStack.isHidden
+        {
+            configureResultsView(hide: false)
+        }
+        resultsTableView.reloadData()
         view.layoutIfNeeded()
     }
-
     
     // MARK:- Actions
     
     @IBAction func AllAction(_ sender: Any)
     {
+        setSelectedViewAppearnce(For: allFiletrButton)
+        setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
+        setUnSelectedViewAppearnce(For: ketoFiletrButton)
+        setUnSelectedViewAppearnce(For: veganFiletrButton)
+        
         let searchKeyword = searchBar.text ?? ""
-        interactor?.fetchSearchResults(query: searchKeyword, filter: nil)
+        interactor?.search(WithKeyowrd: searchKeyword)
     }
     
     @IBAction func lowSugarAction(_ sender: Any)
     {
-        let searchKeyword = searchBar.text ?? ""
-        interactor?.fetchSearchResults(query: searchKeyword, filter: .lowSugar)
+        setSelectedViewAppearnce(For: lowSugarFiletrButton)
+        setUnSelectedViewAppearnce(For: allFiletrButton)
+        setUnSelectedViewAppearnce(For: ketoFiletrButton)
+        setUnSelectedViewAppearnce(For: veganFiletrButton)
+        
+        interactor?.filterResults(WithFilter: .lowSugar)
     }
     
     @IBAction func ketoAction(_ sender: Any)
     {
-        let searchKeyword = searchBar.text ?? ""
-        interactor?.fetchSearchResults(query: searchKeyword, filter: .keto)
+        setSelectedViewAppearnce(For: ketoFiletrButton)
+        setUnSelectedViewAppearnce(For: allFiletrButton)
+        setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
+        setUnSelectedViewAppearnce(For: veganFiletrButton)
+        
+        interactor?.filterResults(WithFilter: .keto)
     }
     
     @IBAction func veganAction(_ sender: Any)
     {
-        let searchKeyword = searchBar.text ?? ""
-        interactor?.fetchSearchResults(query: searchKeyword, filter: .vegan)
+        setSelectedViewAppearnce(For: veganFiletrButton)
+        setUnSelectedViewAppearnce(For: allFiletrButton)
+        setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
+        setUnSelectedViewAppearnce(For: ketoFiletrButton)
+        
+        interactor?.filterResults(WithFilter: .vegan)
     }
     
     // MARK: - Navigation
-
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
     }

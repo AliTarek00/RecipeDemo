@@ -20,7 +20,7 @@ extension SearchViewController: UITextFieldDelegate
             textField.resignFirstResponder()
             return true
         }
-        interactor?.fetchSearchResults(query: searchKeyword, filter: nil)
+        interactor?.search(WithKeyowrd: searchKeyword)
         textField.resignFirstResponder()
         return true
     }
@@ -37,11 +37,13 @@ extension SearchViewController: SearchViewProtocol
     
     func displaySearchSuggestions(_ suggestions: [String])
     {
+        // filterStrings is a method responsiple for mange auto suggestions in SearchTextField pod
         searchBar.filterStrings(suggestions)
     }
     
     func displayError(WithMessage message: String)
     {
+        configureResultsView(hide: true)
         Helper.instance.showAlert(title: "", message: message, ViewController: self)
     }
 }
@@ -58,10 +60,10 @@ extension SearchViewController: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        guard recipes.count - indexPath.row == 2 else {
+        guard recipes.count - indexPath.row == 2  else {
             return
         }
-        interactor?.getNextPageForSearchResults()
+        interactor?.fetchNextPageForSearchResults()
     }
 }
 
