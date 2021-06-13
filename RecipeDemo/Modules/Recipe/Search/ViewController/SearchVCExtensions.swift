@@ -30,9 +30,10 @@ extension SearchViewController: UITextFieldDelegate
 
 extension SearchViewController: SearchViewProtocol
 {
-    func displaySearchResults(_ recipes: [RecipeViewModel])
+    func displaySearchResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath]?)
     {
         self.recipes = recipes
+        refreshTableView(with: indexPaths)
     }
     
     func displaySearchSuggestions(_ suggestions: [String])
@@ -54,16 +55,27 @@ extension SearchViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+//    {
+//        guard indexPath.row ==  recipes.count - 2, tablevi  else {
+//            return
+//        }
+//
+//    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        guard recipes.count - indexPath.row == 2  else {
-            return
+        // calculates where the user is in the y-axis
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.height)
+        {
+            interactor?.fetchNextPageForSearchResults()
         }
-        interactor?.fetchNextPageForSearchResults()
     }
 }
 

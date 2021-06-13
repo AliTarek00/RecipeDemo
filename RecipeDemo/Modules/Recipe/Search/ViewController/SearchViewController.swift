@@ -14,7 +14,7 @@ protocol SearchViewProtocol: class
     var router: SearchRouterProtocol? { get set }
     
     // Update UI with value returned.
-    func displaySearchResults(_ recipes: [RecipeViewModel])
+    func displaySearchResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath]?)
     func displaySearchSuggestions(_ suggestions: [String])
     
     func displayError(WithMessage message: String)
@@ -38,14 +38,8 @@ class SearchViewController: UIViewController
     
     // MARK:- Properties
     
-    lazy var recipes = [RecipeViewModel]() 
-    {
-        didSet
-        {
-            refreshTableView()
-        }
-    }
-    
+    lazy var recipes = [RecipeViewModel]()
+ 
     var interactor: SearchInteractorProtocol?
     var router: SearchRouterProtocol?
     
@@ -90,14 +84,36 @@ class SearchViewController: UIViewController
         resultsTableView.isHidden = hide
     }
     
-    func refreshTableView()
+    func refreshTableView(with indexPaths: [IndexPath]?)
     {
         if resultsTableView.isHidden, filterStack.isHidden
         {
             configureResultsView(hide: false)
         }
-        resultsTableView.reloadData()
-        view.layoutIfNeeded()
+        guard let indexpaths = indexPaths else
+        {
+            resultsTableView.reloadData()
+            return
+        }
+//        resultsTableView.beginUpdates()
+//        resultsTableView.insertRows(at: indexpaths, with: .automatic)
+//        resultsTableView.endUpdates()
+        
+        if #available(iOS 11.0, *)
+        {
+            resultsTableView.performBatchUpdates({
+                resultsTableView.setContentOffset(resultsTableView.contentOffset, animated: false)
+                resultsTableView.insertRows(at: indexpaths, with: .bottom)
+            }, completion: nil)
+        }
+        else
+        {
+            // Fallback on earlier versions
+            resultsTableView.beginUpdates()
+            resultsTableView.setContentOffset(resultsTableView.contentOffset, animated: false)
+            resultsTableView.insertRows(at: indexpaths, with: .bottom)
+            resultsTableView.endUpdates()
+        }
     }
     
     // MARK:- Actions

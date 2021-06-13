@@ -9,7 +9,7 @@ import Foundation
 
 protocol SearchPresenterProtocol
 {
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchResults results: [Recipe])
+    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchResults results: [Recipe], indexPaths: [IndexPath]?)
     func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchSuggestions suggestions: [String])
     func interactor(_ interactor: SearchInteractorProtocol, didFailWith error: Error)
 }
@@ -27,7 +27,7 @@ extension SearchPresenter: SearchPresenterProtocol
 {
     // MARK: - implement UI action handler
     
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchResults results: [Recipe])
+    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchResults results: [Recipe], indexPaths: [IndexPath]?)
     {
         let recipesViewModels = results.compactMap { (recipe) -> RecipeViewModel? in
             let healthLabels = recipe.healthLabels.joined(separator: ", ")
@@ -35,7 +35,7 @@ extension SearchPresenter: SearchPresenterProtocol
             
             return viewModel
         }
-        view?.displaySearchResults(recipesViewModels)
+        view?.displaySearchResults(recipesViewModels, indexPaths: indexPaths)
     }
     
     func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchSuggestions suggestions: [String])

@@ -26,6 +26,7 @@ class SearchInteractor: SearchInteractorProtocol
     private lazy var hits: [Hit] = [Hit]()
     private lazy var suggestions: [String] = [String]()
     
+    private var indexPathsToReload: [IndexPath]?
     lazy var isAPaginationRequest = false
     lazy var lastSearchKeyword: String = ""
     var lastSearchFilter: HealthFilter?
@@ -64,7 +65,6 @@ class SearchInteractor: SearchInteractorProtocol
             {
             case .success(let response):
                 setInteractorProperties(response: response)
-                extractRecipes(fromHits: response.data)
                 
             case .failure(let error):
                 presenter?.interactor(self, didFailWith: error)
@@ -76,6 +76,7 @@ class SearchInteractor: SearchInteractorProtocol
     
     func filterResults(WithFilter filter: HealthFilter)
     {
+        resetPaginationProperties()
         searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: filter.rawValue, from: from, to: to)
         { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
             
@@ -83,7 +84,6 @@ class SearchInteractor: SearchInteractorProtocol
             {
             case .success(let response):
                 setInteractorProperties(response: response)
-                extractRecipes(fromHits: response.data)
                 
             case .failure(let error):
                 presenter?.interactor(self, didFailWith: error)
@@ -96,8 +96,8 @@ class SearchInteractor: SearchInteractorProtocol
     func fetchNextPageForSearchResults()
     {
         guard hasMore, !searchAPIWorker.isLoading, from + to < totalItems else { return }
-        from = to + 1
-        to = from + 10
+        from = to
+        to = (from + 10) > totalItems ? (totalItems - from) : (from + 10)
         isAPaginationRequest = true
 
         searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
@@ -107,7 +107,6 @@ class SearchInteractor: SearchInteractorProtocol
             {
             case .success(let response):
                 setInteractorProperties(response: response)
-                extractRecipes(fromHits: response.data)
                 
             case .failure:
                 print("failure in pagination")
@@ -149,10 +148,21 @@ class SearchInteractor: SearchInteractorProtocol
     {
         guard let from = response.from, let to = response.to, let more = response.more, let totalItems = response.totalItems, let hits = response.data else
         {
+            presenter?.interactor(self, didFailWith: SearchError.invalidSearchKeyowrd)
+            return
+        }
+        
+        guard !hits.isEmpty else
+        {
+            // don't show alert error ife in a pagination request and there is no more items
+            if isAPaginationRequest { return }
+            
             presenter?.interactor(self, didFailWith: SearchError.emptySearch)
             return
         }
         
+        // we should calculate IndexPaths ForNewRows before update from and to values
+        self.indexPathsToReload = calculateIndexPathsForNewRows()
         self.from = from
         self.to = to
         self.hasMore = more
@@ -166,17 +176,26 @@ class SearchInteractor: SearchInteractorProtocol
         {
             self.hits = hits
         }
+        
+        prepareResultsForPresenter()
     }
     
-    private func extractRecipes(fromHits hits: [Hit]?)
+    private func prepareResultsForPresenter()
     {
-        guard let hits = hits else
-        {
-            presenter?.interactor(self, didFailWith: SearchError.emptySearch)
-            return
-        }
-        
         let recipes = hits.compactMap{ $0.recipe }
-        presenter?.interactor(self, didFetchSearchResults: recipes)
+        
+        if isAPaginationRequest
+        {
+            presenter?.interactor(self, didFetchSearchResults: recipes, indexPaths: indexPathsToReload)
+        }
+        else
+        {
+            presenter?.interactor(self, didFetchSearchResults: recipes, indexPaths: nil)
+        }
+    }
+    
+    private func calculateIndexPathsForNewRows()-> [IndexPath]
+    {
+        return (from..<to).map { IndexPath(row: $0, section: 0) }
     }
 }
