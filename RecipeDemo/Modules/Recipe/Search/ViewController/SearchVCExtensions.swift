@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 // MARK: - UITableViewDelegate
 
@@ -51,7 +52,7 @@ extension SearchViewController: SearchViewProtocol
     func displayError(WithMessage message: String)
     {
         resultsTableView.isHidden = true
-        Helper.instance.showAlert(title: "", message: message, ViewController: self)
+        self.view.makeToast(message)
     }
 }
 

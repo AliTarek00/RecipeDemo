@@ -11,12 +11,14 @@ PODS:
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
   - SearchTextField (1.2.4)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Moya
   - NVActivityIndicatorView
   - SDWebImage
   - SearchTextField
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
@@ -25,6 +27,7 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - SDWebImage
     - SearchTextField
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
@@ -32,7 +35,8 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   SearchTextField: 40dc3cc57def5a211f263cac263622c163bbc25a
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: f47536ae6aadc1056106d01298c6ae091cfe1240
+PODFILE CHECKSUM: fcbc3e2cee229c491d5fe7d5dff721deff40b65f
 
 COCOAPODS: 1.10.1

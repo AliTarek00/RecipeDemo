@@ -11,6 +11,7 @@ target 'RecipeDemo' do
   pod 'SDWebImage'
   pod 'NVActivityIndicatorView'
   pod 'SearchTextField'
+  pod 'Toast-Swift'
 
 
   target 'RecipeDemoTests' do
