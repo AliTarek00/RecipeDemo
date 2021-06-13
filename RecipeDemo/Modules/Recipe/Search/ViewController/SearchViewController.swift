@@ -14,16 +14,15 @@ protocol SearchViewProtocol: class
     var router: SearchRouterProtocol? { get set }
     
     // Update UI with value returned.
-    func displaySearchResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath]?)
+    func displaySearchOrFilterResults(_ recipes: [RecipeViewModel])
     func displaySearchSuggestions(_ suggestions: [String])
+    func displayNextPageResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath])
     
     func displayError(WithMessage message: String)
-    //func displayEmptyLabel()
 }
 
 class SearchViewController: UIViewController
 {
-    
     // MARK:- Outlets
     
     @IBOutlet weak var searchBar: SearchTextField!
@@ -39,7 +38,7 @@ class SearchViewController: UIViewController
     // MARK:- Properties
     
     lazy var recipes = [RecipeViewModel]()
- 
+    
     var interactor: SearchInteractorProtocol?
     var router: SearchRouterProtocol?
     
@@ -84,36 +83,22 @@ class SearchViewController: UIViewController
         resultsTableView.isHidden = hide
     }
     
-    func refreshTableView(with indexPaths: [IndexPath]?)
+    func refreshTableView()
     {
-        if resultsTableView.isHidden, filterStack.isHidden
-        {
-            configureResultsView(hide: false)
-        }
-        guard let indexpaths = indexPaths else
-        {
-            resultsTableView.reloadData()
-            return
-        }
-//        resultsTableView.beginUpdates()
-//        resultsTableView.insertRows(at: indexpaths, with: .automatic)
-//        resultsTableView.endUpdates()
-        
-        if #available(iOS 11.0, *)
-        {
-            resultsTableView.performBatchUpdates({
+        configureResultsView(hide: false)
+        resultsTableView.reloadData()
+        let topRow = IndexPath(row: 0,section: 0)
+        resultsTableView.scrollToRow(at: topRow, at: .top, animated: true)
+    }
+    
+    func updateTableView(with indexPaths: [IndexPath])
+    {
+        configureResultsView(hide: false)
+        resultsTableView.performBatchUpdates(
+            {
                 resultsTableView.setContentOffset(resultsTableView.contentOffset, animated: false)
-                resultsTableView.insertRows(at: indexpaths, with: .bottom)
+                resultsTableView.insertRows(at: indexPaths, with: .bottom)
             }, completion: nil)
-        }
-        else
-        {
-            // Fallback on earlier versions
-            resultsTableView.beginUpdates()
-            resultsTableView.setContentOffset(resultsTableView.contentOffset, animated: false)
-            resultsTableView.insertRows(at: indexpaths, with: .bottom)
-            resultsTableView.endUpdates()
-        }
     }
     
     // MARK:- Actions
@@ -125,8 +110,7 @@ class SearchViewController: UIViewController
         setUnSelectedViewAppearnce(For: ketoFiletrButton)
         setUnSelectedViewAppearnce(For: veganFiletrButton)
         
-        let searchKeyword = searchBar.text ?? ""
-        interactor?.search(WithKeyowrd: searchKeyword)
+        interactor?.filterResults(WithFilter: .all)
     }
     
     @IBAction func lowSugarAction(_ sender: Any)

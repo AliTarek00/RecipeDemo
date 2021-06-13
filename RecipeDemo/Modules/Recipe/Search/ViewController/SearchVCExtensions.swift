@@ -30,10 +30,16 @@ extension SearchViewController: UITextFieldDelegate
 
 extension SearchViewController: SearchViewProtocol
 {
-    func displaySearchResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath]?)
+    func displaySearchOrFilterResults(_ recipes: [RecipeViewModel])
     {
         self.recipes = recipes
-        refreshTableView(with: indexPaths)
+        refreshTableView()
+    }
+    
+    func displayNextPageResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath])
+    {
+        self.recipes = recipes
+        updateTableView(with: indexPaths)
     }
     
     func displaySearchSuggestions(_ suggestions: [String])
@@ -44,7 +50,7 @@ extension SearchViewController: SearchViewProtocol
     
     func displayError(WithMessage message: String)
     {
-        configureResultsView(hide: true)
+        resultsTableView.isHidden = true
         Helper.instance.showAlert(title: "", message: message, ViewController: self)
     }
 }
@@ -57,14 +63,6 @@ extension SearchViewController: UITableViewDelegate
     {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-//    {
-//        guard indexPath.row ==  recipes.count - 2, tablevi  else {
-//            return
-//        }
-//
-//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {

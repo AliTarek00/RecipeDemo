@@ -18,15 +18,15 @@ protocol SearchInteractorProtocol
 class SearchInteractor: SearchInteractorProtocol
 {
     // MARK: - Properties
-    
+
     private lazy var from: Int = 0
     private lazy var to: Int = 10
     private lazy var totalItems: Int = 0
     private lazy var hasMore: Bool = true
     private lazy var hits: [Hit] = [Hit]()
     private lazy var suggestions: [String] = [String]()
-    
-    private var indexPathsToReload: [IndexPath]?
+    private lazy var indexPathsToReload: [IndexPath] = [IndexPath]()
+
     lazy var isAPaginationRequest = false
     lazy var lastSearchKeyword: String = ""
     var lastSearchFilter: HealthFilter?
@@ -76,8 +76,11 @@ class SearchInteractor: SearchInteractorProtocol
     
     func filterResults(WithFilter filter: HealthFilter)
     {
+        guard filter != lastSearchFilter else { return }
+        let filterRawValue = filter == .all ? nil : filter.rawValue
         resetPaginationProperties()
-        searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: filter.rawValue, from: from, to: to)
+        
+        searchAPIWorker.fetchSearchResults(query: lastSearchKeyword, filter: filterRawValue, from: from, to: to)
         { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
             
             switch result
@@ -171,27 +174,20 @@ class SearchInteractor: SearchInteractorProtocol
         if isAPaginationRequest
         {
             self.hits.append(contentsOf: hits)
+            let recipes = getRecipesFromHits()
+            presenter?.interactor(self, didFetchNextPageResults: recipes, indexPaths: indexPathsToReload)
         }
         else
         {
             self.hits = hits
+            let recipes = getRecipesFromHits()
+            presenter?.interactor(self, didFetchSearchOrFilterResults: recipes)
         }
-        
-        prepareResultsForPresenter()
     }
     
-    private func prepareResultsForPresenter()
+    private func getRecipesFromHits()-> [Recipe]
     {
-        let recipes = hits.compactMap{ $0.recipe }
-        
-        if isAPaginationRequest
-        {
-            presenter?.interactor(self, didFetchSearchResults: recipes, indexPaths: indexPathsToReload)
-        }
-        else
-        {
-            presenter?.interactor(self, didFetchSearchResults: recipes, indexPaths: nil)
-        }
+        return hits.compactMap{ $0.recipe }
     }
     
     private func calculateIndexPathsForNewRows()-> [IndexPath]
