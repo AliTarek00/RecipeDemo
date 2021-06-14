@@ -8,7 +8,7 @@
 import UIKit
 import Toast_Swift
 
-// MARK: - UITableViewDelegate
+// MARK: - UITextFieldDelegate
 
 extension SearchViewController: UITextFieldDelegate
 {
@@ -33,17 +33,17 @@ extension SearchViewController: UITextFieldDelegate
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - SearchViewProtocol
 
 extension SearchViewController: SearchViewProtocol
 {
-    func displaySearchOrFilterResults(_ recipes: [RecipeViewModel])
+    func displaySearchOrFilterResults(_ recipes: [SearchResultCellViewModel])
     {
         self.recipes = recipes
         refreshTableView()
     }
     
-    func displayNextPageResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath])
+    func displayNextPageResults(_ recipes: [SearchResultCellViewModel], indexPaths: [IndexPath])
     {
         self.recipes = recipes
         updateTableView(with: indexPaths)
@@ -62,12 +62,24 @@ extension SearchViewController: SearchViewProtocol
     }
 }
 
+// MARK: - Navigation
+
+extension SearchViewController
+{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        router?.passDataToNextScene(segue)
+    }
+
+}
+
 // MARK: - UITableViewDelegate
 
 extension SearchViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        router?.navigateToRecipeDetails()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

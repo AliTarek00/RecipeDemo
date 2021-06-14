@@ -18,7 +18,7 @@ class SearchTableViewCell: UITableViewCell
     
     // MARK:- Mthods
 
-    func configure(_ recipe: RecipeViewModel)
+    func configure(_ recipe: SearchResultCellViewModel)
     {
         recipeImage.setImage(from: recipe.imageLink, placeholderImage: #imageLiteral(resourceName: "add image"))
         titleLabel.text = recipe.title

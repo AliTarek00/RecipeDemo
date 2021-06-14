@@ -9,7 +9,7 @@ import Foundation
 
 class SearchBuilder {
 
-    class func buildModule(arroundView view:SearchViewProtocol) {
+    class func buildModule(arroundView view: SearchViewController) {
         
         //MARK: Initialise components.
         let presenter = SearchPresenter()
@@ -19,6 +19,7 @@ class SearchBuilder {
         //MARK: link VIP components.
         view.interactor = interactor
         view.router = router
+        router.viewController = view
         presenter.view = view
         interactor.presenter = presenter
     }

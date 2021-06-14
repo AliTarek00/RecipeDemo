@@ -9,6 +9,8 @@ import Foundation
 
 protocol SearchInteractorProtocol
 {
+    var searchResults: [Recipe] { get }
+
     func search(WithKeyowrd query: String)
     func filterResults(WithFilter filter: HealthFilter)
     func fetchNextPageForSearchResults()
@@ -24,16 +26,16 @@ class SearchInteractor: SearchInteractorProtocol
     private lazy var to: Int = 10
     private lazy var totalItems: Int = 0
     private lazy var hasMore: Bool = true
-    private lazy var hits: [Hit] = [Hit]()
     private lazy var suggestions: [String] = [String]()
     private lazy var indexPathsToReload: [IndexPath] = [IndexPath]()
-
+    lazy var searchResults: [Recipe] = [Recipe]()
     lazy var isAPaginationRequest = false
     lazy var lastSearchKeyword: String = ""
     var lastSearchFilter: HealthFilter?
     
     private let searchAPIWorker: SearchAPIWorkerProtocol
     private let suggestionsWorker: SearchSuggestionWorkerProtocol
+
 
     var presenter: SearchPresenterProtocol?
     
@@ -122,7 +124,7 @@ class SearchInteractor: SearchInteractorProtocol
     
     func saveSearchSuggestions()
     {
-        suggestionsWorker.saveSearchSuggestions(suggestions)
+        suggestionsWorker.saveSuggestions(suggestions)
     }
 
     func fetchSearchSuggestions()
@@ -132,7 +134,7 @@ class SearchInteractor: SearchInteractorProtocol
     
     private func getSearchSuggestions()
     {
-        suggestionsWorker.fetchSearchSuggestions
+        suggestionsWorker.fetchSuggestions
         { [unowned self] (result: Result<[String], Error>) in
             switch result
             {
@@ -171,33 +173,29 @@ class SearchInteractor: SearchInteractorProtocol
         }
         
         // we should calculate IndexPaths ForNewRows before update from and to values
-        self.indexPathsToReload = calculateIndexPathsForNewRows()
+        self.indexPathsToReload = Helper.instance.calculateIndexPathsForNewRows(from: from, to: to)
         self.from = from
         self.to = to
         self.hasMore = more
         self.totalItems = totalItems
         
+        let newRecipes = getRecipesFrom(hits: hits)
+        
         if isAPaginationRequest
         {
-            self.hits.append(contentsOf: hits)
-            let recipes = getRecipesFromHits()
-            presenter?.interactor(self, didFetchNextPageResults: recipes, indexPaths: indexPathsToReload)
+            self.searchResults.append(contentsOf: newRecipes)
+            presenter?.interactor(self, didFetchNextPageResults: searchResults, indexPaths: indexPathsToReload)
         }
         else
         {
-            self.hits = hits
-            let recipes = getRecipesFromHits()
-            presenter?.interactor(self, didFetchSearchOrFilterResults: recipes)
+            self.searchResults = newRecipes
+            presenter?.interactor(self, didFetchSearchOrFilterResults: searchResults)
         }
     }
     
-    private func getRecipesFromHits()-> [Recipe]
+    private func getRecipesFrom(hits: [Hit])-> [Recipe]
     {
         return hits.compactMap{ $0.recipe }
     }
     
-    private func calculateIndexPathsForNewRows()-> [IndexPath]
-    {
-        return (from..<to).map { IndexPath(row: $0, section: 0) }
-    }
 }

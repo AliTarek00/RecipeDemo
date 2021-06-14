@@ -49,4 +49,10 @@ public class Helper
         alert.addAction(cancelAction)
         controller.present(alert, animated: true)
     }
+    
+    func calculateIndexPathsForNewRows(from: Int, to: Int)-> [IndexPath]
+    {
+        return (from..<to).map { IndexPath(row: $0, section: 0) }
+    }
+
 }

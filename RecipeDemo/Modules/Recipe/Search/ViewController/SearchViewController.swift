@@ -14,11 +14,11 @@ protocol SearchViewProtocol: class
     var router: SearchRouterProtocol? { get set }
     
     // Update UI with value returned.
-    func displaySearchOrFilterResults(_ recipes: [RecipeViewModel])
+    func displaySearchOrFilterResults(_ recipes: [SearchResultCellViewModel])
     func displaySearchSuggestions(_ suggestions: [String])
-    func displayNextPageResults(_ recipes: [RecipeViewModel], indexPaths: [IndexPath])
-    
+    func displayNextPageResults(_ recipes: [SearchResultCellViewModel], indexPaths: [IndexPath])
     func displayError(WithMessage message: String)
+    
 }
 
 class SearchViewController: UIViewController
@@ -27,7 +27,6 @@ class SearchViewController: UIViewController
     
     @IBOutlet weak var searchBar: SearchTextField!
     @IBOutlet weak var resultsTableView: UITableView!
-    
     @IBOutlet weak var filterStack: UIStackView!
     
     @IBOutlet weak var allFiletrButton: UIButton!
@@ -37,7 +36,7 @@ class SearchViewController: UIViewController
     
     // MARK:- Properties
     
-    lazy var recipes = [RecipeViewModel]()
+    lazy var recipes = [SearchResultCellViewModel]()
     
     var interactor: SearchInteractorProtocol?
     var router: SearchRouterProtocol?
@@ -69,12 +68,12 @@ class SearchViewController: UIViewController
         searchBar.theme.font = .systemFont(ofSize: 15)
         searchBar.theme.cellHeight = 40
         searchBar.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
-
     }
     
     private func setupGestures()
     {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        tap.cancelsTouchesInView = false;
         self.view.addGestureRecognizer(tap)
     }
     
@@ -159,13 +158,6 @@ class SearchViewController: UIViewController
         
         interactor?.filterResults(WithFilter: .vegan)
     }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-    }
-    
 }
 
 

@@ -9,8 +9,8 @@ import Foundation
 
 protocol SearchSuggestionWorkerProtocol
 {
-    func fetchSearchSuggestions(completion: (Result<[String], Error>) -> Void)
-    func saveSearchSuggestions(_ suggestions: [String])
+    func fetchSuggestions(completion: (Result<[String], Error>) -> Void)
+    func saveSuggestions(_ suggestions: [String])
     func addNewSuggestion(_ searchKeywrd: String)-> [String]
 }
 
@@ -18,7 +18,7 @@ class SearchSuggestionWorker: SearchSuggestionWorkerProtocol
 {
     lazy var sugesstionsArray = SearchSuggestionArray<String>(size: 10)
     
-    func fetchSearchSuggestions(completion: (Result<[String], Error>) -> Void)
+    func fetchSuggestions(completion: (Result<[String], Error>) -> Void)
     {
         guard let searchSuggestions = UserDefaults.standard.array(forKey: "SearchSuggestions") as? [String] else
         {
@@ -29,7 +29,7 @@ class SearchSuggestionWorker: SearchSuggestionWorkerProtocol
         completion(.success(searchSuggestions))
     }
     
-    func saveSearchSuggestions(_ suggestions: [String])
+    func saveSuggestions(_ suggestions: [String])
     {
         UserDefaults.standard.setValue(suggestions, forKey: "SearchSuggestions")
     }
