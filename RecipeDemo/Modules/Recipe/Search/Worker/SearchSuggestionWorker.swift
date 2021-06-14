@@ -25,6 +25,7 @@ class SearchSuggestionWorker: SearchSuggestionWorkerProtocol
             completion(.failure(SearchError.emptySearchSuggestion))
             return
         }
+        sugesstionsArray.addItems(items: searchSuggestions)
         completion(.success(searchSuggestions))
     }
     

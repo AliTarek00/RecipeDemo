@@ -25,6 +25,12 @@ extension SearchViewController: UITextFieldDelegate
         textField.resignFirstResponder()
         return true
     }
+    
+    // Hilper method to hide keyboard
+    @objc func hideKeyboard(_ sender: UITapGestureRecognizer)
+    {
+        searchBar.resignFirstResponder()
+    }
 }
 
 // MARK: - UITableViewDelegate

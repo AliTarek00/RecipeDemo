@@ -11,12 +11,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var searchViewController: SearchViewController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         if let rootNavigationController = application.windows.first?.rootViewController as? UINavigationController,
-           let searchView = rootNavigationController.viewControllers.first as? SearchViewController
+            let searchView = rootNavigationController.viewControllers.first as? SearchViewController
         {
+            searchViewController = searchView
             SearchBuilder.buildModule(arroundView: searchView)
         }
         
@@ -27,6 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool
     {
         return false
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication)
+    {
+        // save searchSuggestions before app closed
+        searchViewController.interactor?.saveSearchSuggestions()
     }
     
 }

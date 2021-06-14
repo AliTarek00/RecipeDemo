@@ -56,9 +56,26 @@ class SearchViewController: UIViewController
     {
         setSelectedViewAppearnce(For: allFiletrButton)
         configureResultsView(hide: true)
-        searchBar.delegate = self
-        
+        setupSearchBar()
+        setupGestures()
         interactor?.fetchSearchSuggestions()
+    }
+    
+    private func setupSearchBar()
+    {
+        searchBar.delegate = self
+        searchBar.startVisible = true
+        searchBar.theme.bgColor = .white
+        searchBar.theme.font = .systemFont(ofSize: 15)
+        searchBar.theme.cellHeight = 40
+        searchBar.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
+
+    }
+    
+    private func setupGestures()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        self.view.addGestureRecognizer(tap)
     }
     
     // MARK:- Public Methods

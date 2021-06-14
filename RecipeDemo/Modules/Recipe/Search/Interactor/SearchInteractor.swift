@@ -13,6 +13,7 @@ protocol SearchInteractorProtocol
     func filterResults(WithFilter filter: HealthFilter)
     func fetchNextPageForSearchResults()
     func fetchSearchSuggestions()
+    func saveSearchSuggestions()
 }
 
 class SearchInteractor: SearchInteractorProtocol
@@ -40,12 +41,7 @@ class SearchInteractor: SearchInteractorProtocol
     {
         self.searchAPIWorker = searchAPIWorker
         self.suggestionsWorker = suggestionsWorker
-        self.fetchSearchSuggestions()
-    }
-    
-    deinit
-    {
-        suggestionsWorker.saveSearchSuggestions(suggestions)
+        self.getSearchSuggestions()
     }
     
     // MARK: - Methods
@@ -55,9 +51,14 @@ class SearchInteractor: SearchInteractorProtocol
         let searchKeyword = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard searchKeyword != lastSearchKeyword else { return }
         
-        resetPaginationProperties()
-        suggestions = suggestionsWorker.addNewSuggestion(searchKeyword)
+        if !suggestions.contains(searchKeyword)
+        {
+            suggestions = suggestionsWorker.addNewSuggestion(searchKeyword)
+            presenter?.interactor(self, didFetchSearchSuggestions: suggestions)
+        }
         
+        resetPaginationProperties()
+
         searchAPIWorker.fetchSearchResults(query: searchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
         { [unowned self] (result: Result<PagingResponse<Hit>, Error>) in
             
@@ -119,6 +120,11 @@ class SearchInteractor: SearchInteractorProtocol
         }
     }
     
+    func saveSearchSuggestions()
+    {
+        suggestionsWorker.saveSearchSuggestions(suggestions)
+    }
+
     func fetchSearchSuggestions()
     {
         presenter?.interactor(self, didFetchSearchSuggestions: suggestions)
