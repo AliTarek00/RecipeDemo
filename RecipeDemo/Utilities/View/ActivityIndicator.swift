@@ -25,7 +25,7 @@ class ActivityIndicator
             let y = ( view.frame.size.height / 2.0 ) - ( 50.0 / 2.0 )
             let theFrame = CGRect(x: x, y: y, width: CGFloat(50), height: CGFloat(50))
             
-            indicator = NVActivityIndicatorView(frame: theFrame, type: .ballRotateChase, color: .appGreen)
+            indicator = NVActivityIndicatorView(frame: theFrame, type: .ballRotateChase, color: .black)
             view.addSubview(indicator)
             view.bringSubviewToFront(indicator)
             view.isUserInteractionEnabled = false

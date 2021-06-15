@@ -24,17 +24,12 @@
 		BB2E6755267245F1004B105A /* Hit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E6754267245F1004B105A /* Hit.swift */; };
 		BB2E6760267248E3004B105A /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675A267248E3004B105A /* DesignableImageView.swift */; };
 		BB2E6761267248E4004B105A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675B267248E3004B105A /* ActivityIndicator.swift */; };
-		BB2E6762267248E4004B105A /* DesignableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675C267248E3004B105A /* DesignableLabel.swift */; };
 		BB2E6763267248E4004B105A /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675D267248E3004B105A /* DesignableButton.swift */; };
 		BB2E6764267248E4004B105A /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675E267248E3004B105A /* DesignableView.swift */; };
-		BB2E6765267248E4004B105A /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E675F267248E3004B105A /* DesignableTextField.swift */; };
-		BB2E676E26724A58004B105A /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E676C26724A58004B105A /* CodableExtension.swift */; };
 		BB2E676F26724A58004B105A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E676D26724A58004B105A /* StringExtension.swift */; };
 		BB2E677826724A6D004B105A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677326724A6C004B105A /* UIColorExtension.swift */; };
-		BB2E677926724A6D004B105A /* UINavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677426724A6C004B105A /* UINavigationExtension.swift */; };
 		BB2E677A26724A6D004B105A /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677526724A6C004B105A /* UIImageViewExtension.swift */; };
 		BB2E677B26724A6D004B105A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677626724A6C004B105A /* UIViewExtension.swift */; };
-		BB2E677C26724A6D004B105A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677726724A6C004B105A /* UIViewControllerExtension.swift */; };
 		BB2E67A626725D6E004B105A /* RecipeSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2E67A526725D6E004B105A /* RecipeSearch.storyboard */; };
 		BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67AE26725DD3004B105A /* SearchViewController.swift */; };
 		BB2E67B426725DEE004B105A /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67B326725DEE004B105A /* SearchPresenter.swift */; };
@@ -104,17 +99,12 @@
 		BB2E6754267245F1004B105A /* Hit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hit.swift; sourceTree = "<group>"; };
 		BB2E675A267248E3004B105A /* DesignableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		BB2E675B267248E3004B105A /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		BB2E675C267248E3004B105A /* DesignableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableLabel.swift; sourceTree = "<group>"; };
 		BB2E675D267248E3004B105A /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		BB2E675E267248E3004B105A /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
-		BB2E675F267248E3004B105A /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
-		BB2E676C26724A58004B105A /* CodableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
 		BB2E676D26724A58004B105A /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		BB2E677326724A6C004B105A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		BB2E677426724A6C004B105A /* UINavigationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationExtension.swift; sourceTree = "<group>"; };
 		BB2E677526724A6C004B105A /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		BB2E677626724A6C004B105A /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		BB2E677726724A6C004B105A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		BB2E67A526725D6E004B105A /* RecipeSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecipeSearch.storyboard; sourceTree = "<group>"; };
 		BB2E67AE26725DD3004B105A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BB2E67B326725DEE004B105A /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
@@ -346,8 +336,6 @@
 				BB2E675B267248E3004B105A /* ActivityIndicator.swift */,
 				BB2E675D267248E3004B105A /* DesignableButton.swift */,
 				BB2E675A267248E3004B105A /* DesignableImageView.swift */,
-				BB2E675C267248E3004B105A /* DesignableLabel.swift */,
-				BB2E675F267248E3004B105A /* DesignableTextField.swift */,
 				BB2E675E267248E3004B105A /* DesignableView.swift */,
 			);
 			path = View;
@@ -367,7 +355,6 @@
 		BB2E676A26724985004B105A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BB2E676C26724A58004B105A /* CodableExtension.swift */,
 				BB2E676D26724A58004B105A /* StringExtension.swift */,
 				BB2E676B267249B6004B105A /* UI */,
 			);
@@ -379,8 +366,6 @@
 			children = (
 				BB2E677326724A6C004B105A /* UIColorExtension.swift */,
 				BB2E677526724A6C004B105A /* UIImageViewExtension.swift */,
-				BB2E677426724A6C004B105A /* UINavigationExtension.swift */,
-				BB2E677726724A6C004B105A /* UIViewControllerExtension.swift */,
 				BB2E677626724A6C004B105A /* UIViewExtension.swift */,
 			);
 			path = UI;
@@ -751,8 +736,6 @@
 				BB2E677A26724A6D004B105A /* UIImageViewExtension.swift in Sources */,
 				BB7AA15E267273C6006872FD /* Helper.swift in Sources */,
 				BB2E66C126721B67004B105A /* AppDelegate.swift in Sources */,
-				BB2E677C26724A6D004B105A /* UIViewControllerExtension.swift in Sources */,
-				BB2E6765267248E4004B105A /* DesignableTextField.swift in Sources */,
 				BB2E676F26724A58004B105A /* StringExtension.swift in Sources */,
 				BB2E6764267248E4004B105A /* DesignableView.swift in Sources */,
 				BB2E674D2672433A004B105A /* Recipe.swift in Sources */,
@@ -778,10 +761,7 @@
 				BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */,
 				BB2E673926722EC9004B105A /* RecipeNetworkProtocol.swift in Sources */,
 				BB7AA16C26727B16006872FD /* SearchResultCellViewModel.swift in Sources */,
-				BB2E6762267248E4004B105A /* DesignableLabel.swift in Sources */,
-				BB2E677926724A6D004B105A /* UINavigationExtension.swift in Sources */,
 				BB2E6763267248E4004B105A /* DesignableButton.swift in Sources */,
-				BB2E676E26724A58004B105A /* CodableExtension.swift in Sources */,
 				BB40A00B2674FA510049856D /* SearchAPIWorker.swift in Sources */,
 				BB5A69AB2677BC87004227A9 /* RecipeDetailsPresenter.swift in Sources */,
 				BBD1CEF42673A8D8002E5C05 /* SearchVCExtensions.swift in Sources */,

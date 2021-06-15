@@ -21,22 +21,7 @@ extension UIColor
     {
         return UIColor(hexa: 0x575757)
     }
-    
-    static var appLightGray: UIColor
-    {
-        return UIColor(hexa: 0xC9C9C9)
-    }
-    
-    static var fieldsGray: UIColor
-    {
-        return UIColor(hexa: 0xF6F6F6)
-    }
-    
-    static var appBackground: UIColor
-    {
-        return UIColor(hexa: 0xF9F9F9)
-      }
-    
+        
     convenience init(red: Int, green: Int, blue: Int)
     {
         assert(red >= 0 && red <= 255, "Invalid red component")

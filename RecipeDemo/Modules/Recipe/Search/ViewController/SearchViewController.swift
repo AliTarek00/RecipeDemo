@@ -83,14 +83,14 @@ class SearchViewController: UIViewController
     
     private func setSelectedViewAppearnce(For button: UIButton)
     {
-        button.backgroundColor = .appGreen
+        button.backgroundColor = .black
         button.setTitleColor(.white, for: .normal)
     }
     
     private func setUnSelectedViewAppearnce(For button: UIButton)
     {
         button.backgroundColor = .white
-        button.setTitleColor(.appGreen, for: .normal)
+        button.setTitleColor(.black, for: .normal)
     }
     
     func configureResultsView(hide: Bool)

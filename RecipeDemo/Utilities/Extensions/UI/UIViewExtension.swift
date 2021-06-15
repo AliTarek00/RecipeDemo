@@ -17,13 +17,4 @@ extension UIView
         })
     }
 
-    func applyBlurEffect(_ style: UIBlurEffect.Style, parent: UIView)
-    {
-        let blurEffect = UIBlurEffect(style: style)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        
-        // Applying a Blurring Effect to the Background Image
-        blurEffectView.frame = parent.bounds
-        self.addSubview(blurEffectView)
-    }
 }
