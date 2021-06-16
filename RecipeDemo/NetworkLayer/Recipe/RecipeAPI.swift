@@ -44,7 +44,7 @@ extension RecipeAPI: TargetType
         {
         case .search:
             guard let path = Bundle.main.path(forResource: "searchSampleData", ofType: "json"),
-                  let data = Data(base64Encoded: path) else {
+                  let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
                 return Data()
             }
             return data

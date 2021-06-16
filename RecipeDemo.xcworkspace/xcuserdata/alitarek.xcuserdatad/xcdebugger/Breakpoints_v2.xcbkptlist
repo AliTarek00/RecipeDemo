@@ -248,7 +248,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "83C86328-D0B4-4D50-8BD9-65A294803CAC"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeDemo/NetworkLayer/Recipe/RecipeAPI.swift"
@@ -264,7 +264,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4BC6EA25-E94F-43F1-8828-8DA3D8A9C894"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeDemo/NetworkLayer/Recipe/RecipeAPI.swift"
