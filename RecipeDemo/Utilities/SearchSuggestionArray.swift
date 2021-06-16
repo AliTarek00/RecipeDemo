@@ -27,21 +27,19 @@ public struct SearchSuggestionArray<T>
         currentItems = items.count
     }
     
-    /// This function append new element to array and if array is full remove first element and append and finally return a reversed  copy from elements
-    public mutating func addAndReturnReversedArray(_ element: T) -> [T]
+    /// This function add new element at the first of array and if the currentItems is equal to array max size (in our case max size is 10 elements) we remove last element (the oldest search suggestion) to make space for the new element.
+    public mutating func addAndReturnArray(_ element: T) -> [T]
     {
         if currentItems < maximumSize
         {
-            array.append(element)
             currentItems += 1
         }
         else
         {
-            array.removeFirst()
-            array.append(element)
+            array.removeLast()
         }
-        
-        return Array(array.compactMap{$0}.reversed())
+        array.insert(element, at: 0)
+        return array.compactMap{$0}
     }
     
 }

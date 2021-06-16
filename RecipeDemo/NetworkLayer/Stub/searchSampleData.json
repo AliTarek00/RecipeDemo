@@ -1,0 +1,33 @@
+{
+   "q":"chiken",
+   "from":0,
+   "to":1,
+   "more":true,
+   "count":1,
+   "hits":[
+      {
+         "recipe":{
+            "uri":"http://www.edamam.com/ontologies/edamam.owl#recipe_8e74f41a0d82ce7fb1e76160e9e78874",
+            "label":"Grilled Huli Huli Chiken Wings",
+            "image":"https://www.edamam.com/web-img/b98/b98a73cc31b0d65d7d1ff10da080562d.jpg",
+            "source":"recipezazz.com",
+            "url":"https://www.recipezazz.com/recipe/grilled-huli-huli-chiken-wings-13662",
+            "shareAs":"http://www.edamam.com/recipe/grilled-huli-huli-chiken-wings-8e74f41a0d82ce7fb1e76160e9e78874/chiken",
+            "yield":8.0,
+            "dietLabels":[
+               "Low-Carb"
+            ],
+            "healthLabels":[
+               "Keto-Friendly",
+               "Dairy-Free",
+               "Egg-Free"
+            ],
+            "ingredientLines":[
+               "2 pounds chicken wings",
+               "1/4 cup ketchup",
+               "3 tablespoons brown sugar"
+            ]
+         }
+      }
+   ]
+}

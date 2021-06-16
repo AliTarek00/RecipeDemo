@@ -12,10 +12,31 @@ import Toast_Swift
 
 extension SearchViewController: UITextFieldDelegate
 {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if range.location == 0 && string == " "
+        { // prevent space on first character
+            return false
+        }
+        
+        if textField.text?.last == " " && string == " "
+        { // allowed only single space
+            return false
+        }
+
+        if string == " " { return true } // now allowing space between name
+
+        if string.rangeOfCharacter(from: CharacterSet.letters.inverted) != nil
+        {
+            return false
+        }
+
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        guard let searchKeyword = textField.text, searchKeyword.isNotEmptyOrSpaces()
-        else
+        guard let searchKeyword = textField.text, searchKeyword.isNotEmptyOrSpaces() else
         {
             displayError(WithMessage: "Please Enter Valid Sarch Keyword")
             textField.resignFirstResponder()

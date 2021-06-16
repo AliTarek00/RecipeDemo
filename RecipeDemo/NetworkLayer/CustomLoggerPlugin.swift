@@ -1,5 +1,5 @@
 //
-//  VerbosePlugin.swift
+//  CustomLoggerPlugin.swift
 //  Almol Admin
 //
 //  Created by Ali Tarek on 2/1/21.
@@ -8,7 +8,7 @@
 
 import Moya
 
-struct VerbosePlugin: PluginType
+struct CustomLoggerPlugin: PluginType
 {
     let verbose: Bool
     

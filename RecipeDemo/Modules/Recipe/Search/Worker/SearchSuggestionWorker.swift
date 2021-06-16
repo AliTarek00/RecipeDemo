@@ -36,7 +36,7 @@ class SearchSuggestionWorker: SearchSuggestionWorkerProtocol
     
     func addNewSuggestion(_ searchKeywrd: String)-> [String]
     {
-        return sugesstionsArray.addAndReturnReversedArray(searchKeywrd)
+        return sugesstionsArray.addAndReturnArray(searchKeywrd)
     }
 
 }

@@ -232,10 +232,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="1uH-K6-pq1" id="qt9-Yh-r1n"/>
-                                    <outlet property="delegate" destination="1uH-K6-pq1" id="ScM-MG-YLC"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cp7-1e-UwI"/>

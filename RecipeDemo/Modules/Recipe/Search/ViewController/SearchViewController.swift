@@ -55,9 +55,17 @@ class SearchViewController: UIViewController
     {
         setSelectedViewAppearnce(For: allFiletrButton)
         configureResultsView(hide: true)
+        setupTableView()
         setupSearchBar()
         setupGestures()
         interactor?.fetchSearchSuggestions()
+    }
+    
+    private func setupTableView()
+    {
+        resultsTableView.tableFooterView = UIView() // this to remove empty cells in case samll number of results
+        resultsTableView.delegate = self
+        resultsTableView.dataSource = self
     }
     
     private func setupSearchBar()

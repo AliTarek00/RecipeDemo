@@ -12,9 +12,10 @@ import Foundation
 extension String
 {
     // MARK: Text Validation
-
+    
     func isNotEmptyOrSpaces() -> Bool
     {
         return !self.isEmpty && (self.split(separator: " ")).count > 0
     }
+    
 }

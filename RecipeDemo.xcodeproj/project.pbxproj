@@ -10,12 +10,14 @@
 		36C5164CC759A5787A0803F8 /* Pods_RecipeDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19017179F0AE3F579DBF1DAB /* Pods_RecipeDemoTests.framework */; };
 		581608A6D892F8644FE23CBE /* Pods_RecipeDemo_RecipeDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C1730027C07437876B2412 /* Pods_RecipeDemo_RecipeDemoUITests.framework */; };
 		7FA265324AC5E84EC57AB338 /* Pods_RecipeDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F874FB60EA662CF88A7F76 /* Pods_RecipeDemo.framework */; };
+		BB199537267A998300787376 /* searchSampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = BB199536267A998300787376 /* searchSampleData.json */; };
+		BB19953E267AAC3800787376 /* MoyaAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB19953D267AAC3800787376 /* MoyaAPIHelper.swift */; };
 		BB2E66C126721B67004B105A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66C026721B67004B105A /* AppDelegate.swift */; };
 		BB2E66CA26721B6D004B105A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB2E66C926721B6D004B105A /* Assets.xcassets */; };
 		BB2E66CD26721B6D004B105A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2E66CB26721B6D004B105A /* LaunchScreen.storyboard */; };
-		BB2E66D826721B6E004B105A /* RecipeDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66D726721B6E004B105A /* RecipeDemoTests.swift */; };
+		BB2E66D826721B6E004B105A /* RecipeNetworkMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66D726721B6E004B105A /* RecipeNetworkMangerTests.swift */; };
 		BB2E66E326721B6F004B105A /* RecipeDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66E226721B6F004B105A /* RecipeDemoUITests.swift */; };
-		BB2E672626722D80004B105A /* VerbosePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E672526722D80004B105A /* VerbosePlugin.swift */; };
+		BB2E672626722D80004B105A /* CustomLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E672526722D80004B105A /* CustomLoggerPlugin.swift */; };
 		BB2E672C26722DB3004B105A /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E672B26722DB3004B105A /* RecipeAPI.swift */; };
 		BB2E673426722EAE004B105A /* RecipeNetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E673326722EAE004B105A /* RecipeNetworkManger.swift */; };
 		BB2E673926722EC9004B105A /* RecipeNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E673826722EC9004B105A /* RecipeNetworkProtocol.swift */; };
@@ -79,18 +81,20 @@
 		7A6EF90DC36297DD4F8FA952 /* Pods-RecipeDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemoTests/Pods-RecipeDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		86C1730027C07437876B2412 /* Pods_RecipeDemo_RecipeDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeDemo_RecipeDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2C50A5741FA7481F85A6D8B /* Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo-RecipeDemoUITests/Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BB199536267A998300787376 /* searchSampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchSampleData.json; sourceTree = "<group>"; };
+		BB19953D267AAC3800787376 /* MoyaAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAPIHelper.swift; sourceTree = "<group>"; };
 		BB2E66BD26721B67004B105A /* RecipeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2E66C026721B67004B105A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB2E66C926721B6D004B105A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB2E66CC26721B6D004B105A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB2E66CE26721B6D004B105A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB2E66D326721B6E004B105A /* RecipeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB2E66D726721B6E004B105A /* RecipeDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDemoTests.swift; sourceTree = "<group>"; };
+		BB2E66D726721B6E004B105A /* RecipeNetworkMangerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetworkMangerTests.swift; sourceTree = "<group>"; };
 		BB2E66D926721B6E004B105A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB2E66DE26721B6F004B105A /* RecipeDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2E66E226721B6F004B105A /* RecipeDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDemoUITests.swift; sourceTree = "<group>"; };
 		BB2E66E426721B6F004B105A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB2E672526722D80004B105A /* VerbosePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbosePlugin.swift; sourceTree = "<group>"; };
+		BB2E672526722D80004B105A /* CustomLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoggerPlugin.swift; sourceTree = "<group>"; };
 		BB2E672B26722DB3004B105A /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 		BB2E673326722EAE004B105A /* RecipeNetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetworkManger.swift; sourceTree = "<group>"; };
 		BB2E673826722EC9004B105A /* RecipeNetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetworkProtocol.swift; sourceTree = "<group>"; };
@@ -174,6 +178,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BB199535267A997300787376 /* Stub */ = {
+			isa = PBXGroup;
+			children = (
+				BB199536267A998300787376 /* searchSampleData.json */,
+			);
+			path = Stub;
+			sourceTree = "<group>";
+		};
 		BB2E66B426721B67004B105A = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +223,7 @@
 		BB2E66D626721B6E004B105A /* RecipeDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				BB2E66D726721B6E004B105A /* RecipeDemoTests.swift */,
+				BB2E66D726721B6E004B105A /* RecipeNetworkMangerTests.swift */,
 				BB2E66D926721B6E004B105A /* Info.plist */,
 			);
 			path = RecipeDemoTests;
@@ -229,7 +241,9 @@
 		BB2E66FD267228ED004B105A /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				BB2E672526722D80004B105A /* VerbosePlugin.swift */,
+				BB2E672526722D80004B105A /* CustomLoggerPlugin.swift */,
+				BB19953D267AAC3800787376 /* MoyaAPIHelper.swift */,
+				BB199535267A997300787376 /* Stub */,
 				BB2E672A26722D9D004B105A /* Recipe */,
 			);
 			path = NetworkLayer;
@@ -598,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2E67A626725D6E004B105A /* RecipeSearch.storyboard in Resources */,
+				BB199537267A998300787376 /* searchSampleData.json in Resources */,
 				BB5A695C2677888F004227A9 /* RecipeDetails.storyboard in Resources */,
 				BB2E66CD26721B6D004B105A /* LaunchScreen.storyboard in Resources */,
 				BB2E66CA26721B6D004B105A /* Assets.xcassets in Resources */,
@@ -750,7 +765,7 @@
 				BB5A69CF2677CCA5004227A9 /* RecipeDetailsRouter.swift in Sources */,
 				BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */,
 				BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */,
-				BB2E672626722D80004B105A /* VerbosePlugin.swift in Sources */,
+				BB2E672626722D80004B105A /* CustomLoggerPlugin.swift in Sources */,
 				BB2E6761267248E4004B105A /* ActivityIndicator.swift in Sources */,
 				BB2E672C26722DB3004B105A /* RecipeAPI.swift in Sources */,
 				BB5A69C92677CBF5004227A9 /* RecipeDetailsBuilder.swift in Sources */,
@@ -758,6 +773,7 @@
 				BB2E6760267248E3004B105A /* DesignableImageView.swift in Sources */,
 				BB2E67B926725E4E004B105A /* SearchInteractor.swift in Sources */,
 				BB7AA18726729D1F006872FD /* Enums.swift in Sources */,
+				BB19953E267AAC3800787376 /* MoyaAPIHelper.swift in Sources */,
 				BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */,
 				BB2E673926722EC9004B105A /* RecipeNetworkProtocol.swift in Sources */,
 				BB7AA16C26727B16006872FD /* SearchResultCellViewModel.swift in Sources */,
@@ -772,7 +788,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB2E66D826721B6E004B105A /* RecipeDemoTests.swift in Sources */,
+				BB2E66D826721B6E004B105A /* RecipeNetworkMangerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

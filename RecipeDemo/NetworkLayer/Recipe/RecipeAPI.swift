@@ -7,7 +7,7 @@
 
 import Moya
 
-enum  RecipeAPI
+enum RecipeAPI
 {    
     case search(query: String, filter: String?, from: Int, to: Int)
 }
@@ -40,7 +40,15 @@ extension RecipeAPI: TargetType
     
     var sampleData: Data
     {
-        return Data()
+        switch self
+        {
+        case .search:
+            guard let path = Bundle.main.path(forResource: "searchSampleData", ofType: "json"),
+                  let data = Data(base64Encoded: path) else {
+                return Data()
+            }
+            return data
+        }
     }
     
     var headers: [String : String]?
