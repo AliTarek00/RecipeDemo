@@ -62,12 +62,14 @@ extension SearchViewController: SearchViewProtocol
     {
         self.recipes = recipes
         refreshTableView()
+        let topRow = IndexPath(row: 0,section: 0)
+        resultsTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
     
     func displayNextPageResults(_ recipes: [SearchResultCellViewModel], indexPaths: [IndexPath])
     {
         self.recipes = recipes
-        updateTableView(with: indexPaths)
+        refreshTableView()
     }
     
     func displaySearchSuggestions(_ suggestions: [String])
@@ -104,13 +106,9 @@ extension SearchViewController: UITableViewDelegate
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        // calculates where the user is in the y-axis
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if (offsetY > contentHeight - scrollView.frame.height)
+        if indexPath.row == recipes.count - 1
         {
             interactor?.fetchNextPageForSearchResults()
         }

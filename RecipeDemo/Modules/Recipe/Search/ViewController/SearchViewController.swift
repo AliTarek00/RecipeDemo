@@ -111,18 +111,6 @@ class SearchViewController: UIViewController
     {
         configureResultsView(hide: false)
         resultsTableView.reloadData()
-        let topRow = IndexPath(row: 0,section: 0)
-        resultsTableView.scrollToRow(at: topRow, at: .top, animated: true)
-    }
-    
-    func updateTableView(with indexPaths: [IndexPath])
-    {
-        configureResultsView(hide: false)
-        resultsTableView.performBatchUpdates(
-            {
-                resultsTableView.setContentOffset(resultsTableView.contentOffset, animated: false)
-                resultsTableView.insertRows(at: indexPaths, with: .bottom)
-            }, completion: nil)
     }
     
     // MARK:- Actions
