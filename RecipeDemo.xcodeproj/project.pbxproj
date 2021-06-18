@@ -223,6 +223,7 @@
 		BB2E66D626721B6E004B105A /* RecipeDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				BBDB91ED267CC0EF00C64496 /* Search */,
 				BB2E66D726721B6E004B105A /* RecipeNetworkMangerTests.swift */,
 				BB2E66D926721B6E004B105A /* Info.plist */,
 			);
@@ -491,6 +492,13 @@
 				BB40A00A2674FA510049856D /* SearchAPIWorker.swift */,
 			);
 			path = Worker;
+			sourceTree = "<group>";
+		};
+		BBDB91ED267CC0EF00C64496 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		BDCD4EBA98294A592A6BDAC5 /* Frameworks */ = {
