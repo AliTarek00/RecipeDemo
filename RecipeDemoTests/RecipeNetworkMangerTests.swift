@@ -8,19 +8,25 @@
 import XCTest
 @testable import RecipeDemo
 
-class RecipeDemoTests: XCTestCase {
+class RecipeDemoTests: XCTestCase
+{
+    // MARK:- SUT
     
     var networkManager: RecipeNetworkManager!
     
+    // MARK:- Test LifeCycle Methods
+
     override func setUpWithError() throws
     {
         networkManager = RecipeNetworkManager(type: .test)
     }
     
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDownWithError() throws
+    {
     }
     
+    // MARK:- Test Methods
+
     func testFetchSearchResults() throws
     {
         let expectedNumberOSearchfResults = 1
