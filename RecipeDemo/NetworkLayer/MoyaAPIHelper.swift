@@ -6,6 +6,8 @@
 //
 
 import Moya
+import Combine
+import Foundation
 
 enum ServiceType
 {
@@ -51,28 +53,34 @@ class MoyaAPIHelper<T: TargetType>
     
     // MARK:- Methods
     
-    func request<C: Codable>(targetCase: T,
-                             completion: @escaping (Result<PagingResponse<C>,
-                                                           Error>) -> Void)
+    func request<C: Codable>(targetCase: T)->AnyPublisher<C, Error>
     {
-        provider.request(targetCase) { result in
-            switch result
-            {
-            case .success(let value):
-                let decoder = JSONDecoder()
-                do
-                {
-                    let response = try decoder.decode(PagingResponse<C>.self, from: value.data)
-                    completion(.success(response))
-                }
-                catch let error
-                {
-                    completion(.failure(error))
-                }
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        provider
+            .requestPublisher(targetCase)
+            .map { $0.data }
+            .decode(type: C.self, decoder: JSONDecoder())
+            .mapError { $0 }
+            .eraseToAnyPublisher()
+        
+        
+//        provider.request(targetCase) { result in
+//            switch result
+//            {
+//            case .success(let value):
+//                let decoder = JSONDecoder()
+//                do
+//                {
+//                    let response = try decoder.decode(PagingResponse<C>.self, from: value.data)
+//                    completion(.success(response))
+//                }
+//                catch let error
+//                {
+//                    completion(.failure(error))
+//                }
+//
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
     }
 }

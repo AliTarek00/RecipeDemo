@@ -6,6 +6,7 @@
 //
 
 import Moya
+import Combine
 
 class RecipeNetworkManager: RecipeNetworkable
 {
@@ -22,9 +23,9 @@ class RecipeNetworkManager: RecipeNetworkable
     
     // MARK: - Methods
     
-    func search(query: String, filter: String?, from: Int, to: Int, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)
+    func search(query: String, filter: String?, from: Int, to: Int)-> AnyPublisher<PagingResponse<Hit>, Error>
     {
         let request: RecipeAPI = .search(query: query, filter: filter, from: from, to: to)
-        moyaAPIHelper.request(targetCase: request, completion: completion)
+        return moyaAPIHelper.request(targetCase: request)
     }
 }

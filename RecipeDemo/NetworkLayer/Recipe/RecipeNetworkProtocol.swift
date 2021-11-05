@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import Combine
 
-protocol RecipeNetworkable: class
+protocol RecipeNetworkable: AnyObject
 {
     // MARK: Methods
 
-    func search(query: String, filter: String?, from: Int, to: Int, completion: @escaping (Result<PagingResponse<Hit>, Error>) -> Void)    
+    func search(query: String, filter: String?, from: Int, to: Int)-> AnyPublisher<PagingResponse<Hit>, Error>
 }
