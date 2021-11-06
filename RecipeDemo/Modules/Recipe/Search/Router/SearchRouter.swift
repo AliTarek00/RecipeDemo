@@ -38,7 +38,7 @@ class SearchRouter: SearchRouterProtocol
     private func passDataToRecipeDetails(_ segue: UIStoryboardSegue)
     {
         if let selectedIndexPath = viewController?.resultsTableView.indexPathForSelectedRow,
-             let selectedRecipe = viewController?.interactor?.searchResults[selectedIndexPath.row],
+           let selectedRecipe = viewController?.interactor?.searchResults.value[selectedIndexPath.row],
                 let recipeDetailsViewController = segue.destination as? RecipeDetailsViewController
         {
             RecipeDetailsBuilder.buildModule(arroundView: recipeDetailsViewController, recipe: selectedRecipe)

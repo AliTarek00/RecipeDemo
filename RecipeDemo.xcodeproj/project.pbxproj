@@ -46,6 +46,7 @@
 		BB5A69B12677BF6A004227A9 /* RecipeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A69B02677BF6A004227A9 /* RecipeDetailsViewModel.swift */; };
 		BB5A69C92677CBF5004227A9 /* RecipeDetailsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A69C82677CBF5004227A9 /* RecipeDetailsBuilder.swift */; };
 		BB5A69CF2677CCA5004227A9 /* RecipeDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A69CE2677CCA5004227A9 /* RecipeDetailsRouter.swift */; };
+		BB651EF8273698B00079880F /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB651EF7273698B00079880F /* SearchRequest.swift */; };
 		BB7AA15E267273C6006872FD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA15D267273C6006872FD /* Helper.swift */; };
 		BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16326727974006872FD /* SearchTableViewCell.swift */; };
 		BB7AA16C26727B16006872FD /* SearchResultCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16B26727B16006872FD /* SearchResultCellViewModel.swift */; };
@@ -126,6 +127,7 @@
 		BB5A69B02677BF6A004227A9 /* RecipeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModel.swift; sourceTree = "<group>"; };
 		BB5A69C82677CBF5004227A9 /* RecipeDetailsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsBuilder.swift; sourceTree = "<group>"; };
 		BB5A69CE2677CCA5004227A9 /* RecipeDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsRouter.swift; sourceTree = "<group>"; };
+		BB651EF7273698B00079880F /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		BB7AA15D267273C6006872FD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BB7AA16326727974006872FD /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		BB7AA16B26727B16006872FD /* SearchResultCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellViewModel.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			children = (
 				BB2E6754267245F1004B105A /* Hit.swift */,
 				BB2E674C2672433A004B105A /* Recipe.swift */,
+				BB651EF7273698B00079880F /* SearchRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				BB2E673426722EAE004B105A /* RecipeNetworkManger.swift in Sources */,
 				BB2E67B426725DEE004B105A /* SearchPresenter.swift in Sources */,
 				BB5A696626778D86004227A9 /* RecipeDetailsViewController.swift in Sources */,
+				BB651EF8273698B00079880F /* SearchRequest.swift in Sources */,
 				BB2E6755267245F1004B105A /* Hit.swift in Sources */,
 				BB2E677A26724A6D004B105A /* UIImageViewExtension.swift in Sources */,
 				BB7AA15E267273C6006872FD /* Helper.swift in Sources */,

@@ -32,7 +32,7 @@ extension SearchError: LocalizedError
     }
 }
 
-enum HealthFilter: String
+enum HealthFilter: String, Codable
 {
     case all
     case lowSugar = "low-sugar"

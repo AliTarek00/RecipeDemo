@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 protocol SearchAPIWorkerProtocol
 {
     var isLoading: Bool { get }
@@ -41,3 +42,5 @@ class SearchAPIWorker: SearchAPIWorkerProtocol
         }
     }
 }
+
+*/

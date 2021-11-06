@@ -12,5 +12,5 @@ protocol RecipeNetworkable: AnyObject
 {
     // MARK: Methods
 
-    func search(query: String, filter: String?, from: Int, to: Int)-> AnyPublisher<PagingResponse<Hit>, Error>
+    func search(request: SearchRequest)-> AnyPublisher<PagingResponse<Hit>, Error>
 }

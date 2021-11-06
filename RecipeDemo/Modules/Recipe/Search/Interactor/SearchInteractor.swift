@@ -62,8 +62,9 @@ class SearchInteractor: SearchInteractorProtocol {
         resetPaginationProperties()
         isLoading = true
         
+        let request = SearchRequest(query: searchKeyword, filter: lastSearchFilter, from: from, to: to)
         recipeService
-            .search(query: searchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
+            .search(request: request)
             .sink { [weak self] (completion) in
                 self?.isLoading = false
                 self?.isAPaginationRequest = false
@@ -81,12 +82,13 @@ class SearchInteractor: SearchInteractorProtocol {
     
     func filterResults(WithFilter filter: HealthFilter) {
         guard filter != lastSearchFilter else { return }
-        let filterRawValue = filter == .all ? nil : filter.rawValue
+        let selectedFilter = filter == .all ? nil : filter
         resetPaginationProperties()
         isLoading = false
 
+        let request = SearchRequest(query: lastSearchKeyword, filter: selectedFilter, from: from, to: to)
         recipeService
-            .search(query: lastSearchKeyword, filter: filterRawValue, from: from, to: to)
+            .search(request: request)
             .sink { [weak self] (completion) in
                 self?.isLoading = false
                 self?.isAPaginationRequest = false
@@ -109,8 +111,9 @@ class SearchInteractor: SearchInteractorProtocol {
         isAPaginationRequest = true
         isLoading = false
 
+        let request = SearchRequest(query: lastSearchKeyword, filter: lastSearchFilter, from: from, to: to)
         recipeService
-            .search(query: lastSearchKeyword, filter: lastSearchFilter?.rawValue, from: from, to: to)
+            .search(request: request)
             .sink { [weak self] (completion) in
                 self?.isLoading = false
                 self?.isAPaginationRequest = false

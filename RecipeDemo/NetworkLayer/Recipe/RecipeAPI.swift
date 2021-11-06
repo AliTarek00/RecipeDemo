@@ -9,7 +9,7 @@ import Moya
 
 enum RecipeAPI
 {    
-    case search(query: String, filter: String?, from: Int, to: Int)
+    case search(_ request: SearchRequest)
 }
 
 extension RecipeAPI: TargetType
@@ -65,9 +65,9 @@ extension RecipeAPI: TargetType
     {
         switch self
         {
-        case let .search(query, filter, from, to):
-            var parameters = ["app_id": AppAuthKeys.appId, "app_key": AppAuthKeys.appKey, "q": query, "from": from, "to": to] as [String : Any]
-            if let healthFilter = filter
+        case let .search(request):
+            var parameters = ["app_id": AppAuthKeys.appId, "app_key": AppAuthKeys.appKey, "q": request.query, "from": request.from, "to": request.to] as [String : Any]
+            if let healthFilter = request.filter
             {
                 parameters["health"] = healthFilter
             }

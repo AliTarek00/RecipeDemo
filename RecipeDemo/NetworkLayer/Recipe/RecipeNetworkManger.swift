@@ -23,9 +23,9 @@ class RecipeNetworkManager: RecipeNetworkable
     
     // MARK: - Methods
     
-    func search(query: String, filter: String?, from: Int, to: Int)-> AnyPublisher<PagingResponse<Hit>, Error>
+    func search(request: SearchRequest)-> AnyPublisher<PagingResponse<Hit>, Error>
     {
-        let request: RecipeAPI = .search(query: query, filter: filter, from: from, to: to)
-        return moyaAPIHelper.request(targetCase: request)
+        let endpoint: RecipeAPI = .search(request)
+        return moyaAPIHelper.request(targetCase: endpoint)
     }
 }
