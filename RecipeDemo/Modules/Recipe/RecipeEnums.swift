@@ -7,19 +7,15 @@
 
 import Foundation
 
-enum SearchError: Error
-{
+enum SearchError: Error {
     case emptySearch
     case invalidSearchKeyowrd
     case emptySearchSuggestion
 }
 
-extension SearchError: LocalizedError
-{
-    var errorDescription: String?
-    {
-        switch self
-        {
+extension SearchError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
         case .emptySearch:
             return NSLocalizedString("Empty Search Results, Try Again!", comment: "")
             
@@ -32,15 +28,13 @@ extension SearchError: LocalizedError
     }
 }
 
-enum HealthFilter: String, Codable
-{
+enum HealthFilter: String, Codable {
     case all
     case lowSugar = "low-sugar"
     case keto = "keto-friendly"
     case vegan = "vegan"
 }
 
-enum RecipeSegues: String
-{
+enum RecipeSegues: String {
     case recipeDetails = "showRecipeDetails"
 }

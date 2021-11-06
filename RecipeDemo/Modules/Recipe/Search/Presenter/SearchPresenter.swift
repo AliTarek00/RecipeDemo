@@ -7,12 +7,13 @@
 
 import Foundation
 
+/*
 protocol SearchPresenterProtocol
 {
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchOrFilterResults results: [Recipe])
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchSuggestions suggestions: [String])
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchNextPageResults results: [Recipe], indexPaths: [IndexPath])
-    func interactor(_ interactor: SearchInteractorProtocol, didFailWith error: Error)
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchSearchOrFilterResults results: [Recipe])
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchSearchSuggestions suggestions: [String])
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchNextPageResults results: [Recipe], indexPaths: [IndexPath])
+    func interactor(_ interactor: SearchViewModelProtocol, didFailWith error: Error)
 }
 
 class SearchPresenter
@@ -28,24 +29,24 @@ extension SearchPresenter: SearchPresenterProtocol
 {
     // MARK: - Implement UI events handlers (search, filter, nextPage)
     
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchOrFilterResults results: [Recipe])
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchSearchOrFilterResults results: [Recipe])
     {
         let recipesViewModels = convertRecipesToSearchResultsViewModels(recipes: results)
         view?.displaySearchOrFilterResults(recipesViewModels)
     }
     
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchSearchSuggestions suggestions: [String])
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchSearchSuggestions suggestions: [String])
     {
         view?.displaySearchSuggestions(suggestions)
     }
         
-    func interactor(_ interactor: SearchInteractorProtocol, didFetchNextPageResults results: [Recipe], indexPaths: [IndexPath])
+    func interactor(_ interactor: SearchViewModelProtocol, didFetchNextPageResults results: [Recipe], indexPaths: [IndexPath])
     {
         let recipesViewModels = convertRecipesToSearchResultsViewModels(recipes: results)
         view?.displayNextPageResults(recipesViewModels, indexPaths: indexPaths)
     }
     
-    func interactor(_ interactor: SearchInteractorProtocol, didFailWith error: Error)
+    func interactor(_ interactor: SearchViewModelProtocol, didFailWith error: Error)
     {
         view?.displayError(WithMessage: error.localizedDescription)
     }
@@ -63,3 +64,5 @@ extension SearchPresenter: SearchPresenterProtocol
         return resultsViewModels
     }
 }
+
+*/

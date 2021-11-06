@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct PagingResponse<Data: Codable>: Codable
-{
+struct PagingResponse<Data: Codable>: Codable {
     let status : String?
     let message: String?
     let data : [Data]?
@@ -18,8 +17,7 @@ struct PagingResponse<Data: Codable>: Codable
     let more: Bool?
     let totalItems: Int?
     
-    enum CodingKeys: String, CodingKey
-    {
+    enum CodingKeys: String, CodingKey {
         case status = "status"
         case message = "message"
         case data = "hits"

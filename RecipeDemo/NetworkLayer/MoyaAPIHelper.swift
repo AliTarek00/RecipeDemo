@@ -9,27 +9,24 @@ import Moya
 import Combine
 import Foundation
 
-enum ServiceType
-{
+enum ServiceType {
     case production
     case test
 }
 
-class MoyaAPIHelper<T: TargetType>
-{
-    // MARK:- Properties
+class MoyaAPIHelper<T: TargetType> {
+    
+    // MARK: Properties
     
     private var provider: MoyaProvider<T>
     
-    // MARK:- Init
+    // MARK: Init
     
-    init(type: ServiceType, withLogger: Bool)
-    {
-        let networkActivityClosure: NetworkActivityPlugin.NetworkActivityClosure =
-            { (activity, _) in
+    init(type: ServiceType, withLogger: Bool) {
+        let networkActivityClosure: NetworkActivityPlugin.NetworkActivityClosure = {
+            (activity, _) in
                 
-                switch activity
-                {
+                switch activity {
                 case .began:
                     ActivityIndicator.startAnimating()
                     
@@ -51,36 +48,14 @@ class MoyaAPIHelper<T: TargetType>
         self.provider = MoyaProvider<T>(stubClosure: serviceType, plugins: plugins)
     }
     
-    // MARK:- Methods
+    //MARK: Methods
     
-    func request<C: Codable>(targetCase: T)->AnyPublisher<C, Error>
-    {
+    func request<C: Codable>(targetCase: T)->AnyPublisher<C, Error> {
         provider
             .requestPublisher(targetCase)
             .map { $0.data }
             .decode(type: C.self, decoder: JSONDecoder())
             .mapError { $0 }
             .eraseToAnyPublisher()
-        
-        
-//        provider.request(targetCase) { result in
-//            switch result
-//            {
-//            case .success(let value):
-//                let decoder = JSONDecoder()
-//                do
-//                {
-//                    let response = try decoder.decode(PagingResponse<C>.self, from: value.data)
-//                    completion(.success(response))
-//                }
-//                catch let error
-//                {
-//                    completion(.failure(error))
-//                }
-//
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
     }
 }

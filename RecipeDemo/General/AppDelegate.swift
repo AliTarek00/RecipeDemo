@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication)
     {
         // save searchSuggestions before app closed
-        searchViewController.interactor?.saveSearchSuggestions()
+        searchViewController.viewModel?.saveSearchSuggestions()
     }
     
 }

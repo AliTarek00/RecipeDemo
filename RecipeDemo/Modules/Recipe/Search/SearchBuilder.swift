@@ -12,15 +12,15 @@ class SearchBuilder {
     class func buildModule(arroundView view: SearchViewController) {
         
         //MARK: Initialise components.
-        let presenter = SearchPresenter()
-        let interactor = SearchInteractor(recipeService: RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorker())
+        //let presenter = SearchPresenter()
+        let interactor = SearchViewModel()
         let router = SearchRouter()
         
         //MARK: link VIP components.
-        view.interactor = interactor
+        view.viewModel = interactor
         view.router = router
         router.viewController = view
         presenter.view = view
-        interactor.presenter = presenter
+        //interactor.presenter = presenter
     }
 }

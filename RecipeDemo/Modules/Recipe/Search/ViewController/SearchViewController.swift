@@ -7,11 +7,12 @@
 
 import UIKit
 import SearchTextField
+import Combine
 
-protocol SearchViewProtocol: class
+protocol SearchViewProtocol: AnyObject
 {
-    var interactor: SearchInteractorProtocol? { get set }
-    var router: SearchRouterProtocol? { get set }
+    var viewModel: SearchViewModelProtocol! { get set }
+    var router: SearchRouterProtocol! { get set }
     
     // Update UI with value returned.
     func displaySearchOrFilterResults(_ recipes: [SearchResultCellViewModel])
@@ -23,7 +24,7 @@ protocol SearchViewProtocol: class
 
 class SearchViewController: UIViewController
 {
-    // MARK:- Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var searchBar: SearchTextField!
     @IBOutlet weak var resultsTableView: UITableView!
@@ -34,31 +35,69 @@ class SearchViewController: UIViewController
     @IBOutlet weak var ketoFiletrButton: UIButton!
     @IBOutlet weak var veganFiletrButton: UIButton!
     
-    // MARK:- Properties
+    // MARK: - Properties
     
-    lazy var recipes = [SearchResultCellViewModel]()
+    var viewModel: SearchViewModelProtocol!
+    var router: SearchRouterProtocol!
     
-    var interactor: SearchInteractorProtocol?
-    var router: SearchRouterProtocol?
+    private lazy var subscribtions = Set<AnyCancellable>()
     
     // MARK: View Controller Life Cycle
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
-    // MARK:- Private Methods
+    // MARK: - Private Methods
     
-    private func setup()
-    {
+    private func setup() {
         setSelectedViewAppearnce(For: allFiletrButton)
         configureResultsView(hide: true)
         setupTableView()
         setupSearchBar()
         setupGestures()
-        interactor?.fetchSearchSuggestions()
+        viewModel?.fetchSearchSuggestions()
+        bindUIWithViewMode()
+    }
+    
+    private func bindUIWithViewMode() {
+        searchBar
+            .textPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] text in
+                self?.viewModel?.searchKeyword.send(text)
+            })
+            .store(in: &subscribtions)
+        
+        viewModel?.searchResults
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.refreshSearchOrFilterResults()
+            })
+            .store(in: &subscribtions)
+        
+        viewModel?.nextPageResults
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.refreshTableView()
+            })
+            .store(in: &subscribtions)
+        
+        viewModel?.searchSuggestions
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] suggestions in
+                self?.searchBar.filterStrings(suggestions)
+            })
+            .store(in: &subscribtions)
+        
+        viewModel?.errorMessage
+            .receive(on: DispatchQueue.main)
+            .compactMap{$0}
+            .sink(receiveValue: { [weak self] message in
+                self?.displayError(WithMessage: message)
+            })
+            .store(in: &subscribtions)
     }
     
     private func setupTableView()
@@ -84,75 +123,74 @@ class SearchViewController: UIViewController
         tap.cancelsTouchesInView = false;
         self.view.addGestureRecognizer(tap)
     }
-    
-    // MARK:- Public Methods
-    
-    // MARK:- Helper Methods
-    
-    private func setSelectedViewAppearnce(For button: UIButton)
-    {
+            
+    private func setSelectedViewAppearnce(For button: UIButton) {
         button.backgroundColor = .black
         button.setTitleColor(.white, for: .normal)
     }
     
-    private func setUnSelectedViewAppearnce(For button: UIButton)
-    {
+    private func setUnSelectedViewAppearnce(For button: UIButton) {
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
     }
     
-    func configureResultsView(hide: Bool)
-    {
-        filterStack.isHidden = hide
-        resultsTableView.isHidden = hide
+    private func refreshSearchOrFilterResults() {
+        refreshTableView()
+        let topRow = IndexPath(row: 0,section: 0)
+        resultsTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
     
-    func refreshTableView()
-    {
+    private func refreshTableView() {
         configureResultsView(hide: false)
         resultsTableView.reloadData()
     }
     
-    // MARK:- Actions
+    private func configureResultsView(hide: Bool) {
+        filterStack.isHidden = hide
+        resultsTableView.isHidden = hide
+    }
     
-    @IBAction func AllAction(_ sender: Any)
-    {
+    private func displayError(WithMessage message: String) {
+        resultsTableView.isHidden = true
+        self.view.makeToast(message)
+    }
+        
+    // MARK: - Actions
+    
+    @IBAction func AllAction(_ sender: Any) {
         setSelectedViewAppearnce(For: allFiletrButton)
         setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
         setUnSelectedViewAppearnce(For: ketoFiletrButton)
         setUnSelectedViewAppearnce(For: veganFiletrButton)
         
-        interactor?.filterResults(WithFilter: .all)
+        viewModel?.searchFilter.value = .all
     }
     
-    @IBAction func lowSugarAction(_ sender: Any)
-    {
+    @IBAction func lowSugarAction(_ sender: Any) {
         setSelectedViewAppearnce(For: lowSugarFiletrButton)
         setUnSelectedViewAppearnce(For: allFiletrButton)
         setUnSelectedViewAppearnce(For: ketoFiletrButton)
         setUnSelectedViewAppearnce(For: veganFiletrButton)
         
-        interactor?.filterResults(WithFilter: .lowSugar)
+        viewModel?.searchFilter.value = .lowSugar
     }
     
-    @IBAction func ketoAction(_ sender: Any)
-    {
+    @IBAction func ketoAction(_ sender: Any) {
         setSelectedViewAppearnce(For: ketoFiletrButton)
         setUnSelectedViewAppearnce(For: allFiletrButton)
         setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
         setUnSelectedViewAppearnce(For: veganFiletrButton)
         
-        interactor?.filterResults(WithFilter: .keto)
+        viewModel?.searchFilter.value = .keto
     }
     
-    @IBAction func veganAction(_ sender: Any)
-    {
+    @IBAction func veganAction(_ sender: Any) {
         setSelectedViewAppearnce(For: veganFiletrButton)
         setUnSelectedViewAppearnce(For: allFiletrButton)
         setUnSelectedViewAppearnce(For: lowSugarFiletrButton)
         setUnSelectedViewAppearnce(For: ketoFiletrButton)
         
-        interactor?.filterResults(WithFilter: .vegan)
+        viewModel?.searchFilter.value = .vegan
     }
 }
 

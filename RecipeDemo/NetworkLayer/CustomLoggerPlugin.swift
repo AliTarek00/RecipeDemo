@@ -8,40 +8,31 @@
 
 import Moya
 
-struct CustomLoggerPlugin: PluginType
-{
+struct CustomLoggerPlugin: PluginType {
     let verbose: Bool
     
-    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest
-    {
-        #if DEBUG
+    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+#if DEBUG
         if let body = request.httpBody,
-            let str = String(data: body, encoding: .utf8)
-        {
-            if verbose
-            {
+           let str = String(data: body, encoding: .utf8) {
+            if verbose {
                 print("request to send: \(str))")
             }
         }
-        #endif
+#endif
         return request
     }
     
-    func didReceive(_ result: Result<Response, MoyaError>, target: TargetType)
-    {
-        #if DEBUG
-        switch result
-        {
+    func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
+#if DEBUG
+        switch result {
         case .success(let body):
-            if verbose
-            {
+            if verbose {
                 print("Response:")
-                if let json = try? JSONSerialization.jsonObject(with: body.data, options: .mutableContainers)
-                {
+                if let json = try? JSONSerialization.jsonObject(with: body.data, options: .mutableContainers) {
                     print(json)
                 }
-                else
-                {
+                else {
                     let response = String(data: body.data, encoding: .utf8)!
                     print(response)
                 }
@@ -49,6 +40,6 @@ struct CustomLoggerPlugin: PluginType
         case .failure( _):
             break
         }
-        #endif
+#endif
     }
 }

@@ -8,23 +8,20 @@
 import Moya
 import Combine
 
-class RecipeNetworkManager: RecipeNetworkable
-{
+class RecipeNetworkManager: RecipeNetworkable {
     // MARK: Properties
     
     private let moyaAPIHelper: MoyaAPIHelper<RecipeAPI>
     
     // MARK: Init
    
-    init(type: ServiceType = .production, withLogger: Bool = true)
-    {
+    init(type: ServiceType = .production, withLogger: Bool = true) {
         moyaAPIHelper = MoyaAPIHelper(type: type, withLogger: withLogger)
     }
     
     // MARK: - Methods
     
-    func search(request: SearchRequest)-> AnyPublisher<PagingResponse<Hit>, Error>
-    {
+    func search(request: SearchRequest)-> AnyPublisher<PagingResponse<Hit>, Error> {
         let endpoint: RecipeAPI = .search(request)
         return moyaAPIHelper.request(targetCase: endpoint)
     }
