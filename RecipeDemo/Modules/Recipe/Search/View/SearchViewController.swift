@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
             })
             .store(in: &subscribtions)
         
-        viewModel?.searchResults
+        viewModel.searchResults
             .receive(on: DispatchQueue.main)
             .print()
             .filter{!$0.isEmpty}
@@ -72,7 +72,7 @@ class SearchViewController: UIViewController {
             })
             .store(in: &subscribtions)
         
-        viewModel?.nextPageResults
+        viewModel.nextPageResults
             .receive(on: DispatchQueue.main)
             .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] _ in
@@ -80,7 +80,7 @@ class SearchViewController: UIViewController {
             })
             .store(in: &subscribtions)
         
-        viewModel?.searchSuggestions
+        viewModel.searchSuggestions
             .receive(on: DispatchQueue.main)
             .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] suggestions in
@@ -88,11 +88,23 @@ class SearchViewController: UIViewController {
             })
             .store(in: &subscribtions)
         
-        viewModel?.errorMessage
+        viewModel.errorMessage
             .receive(on: DispatchQueue.main)
             .compactMap{$0}
             .sink(receiveValue: { [weak self] message in
                 self?.displayError(WithMessage: message)
+            })
+            .store(in: &subscribtions)
+        
+        viewModel.isLoading
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                if isLoading {
+                    self?.startLoading()
+                } else {
+                    self?.stopLoading()
+                }
             })
             .store(in: &subscribtions)
     }

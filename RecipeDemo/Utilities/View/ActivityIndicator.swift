@@ -13,14 +13,12 @@ class ActivityIndicator
 {
     private static var indicator: NVActivityIndicatorView!
 
-    static func startAnimating()
-    {
-        DispatchQueue.main.async
-        {
-            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else {
-                print("can not get current view ")
-                return
-            }
+    static func startAnimating(onView view: UIView) {
+        DispatchQueue.main.async {
+//            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else {
+//                print("can not get current view ")
+//                return
+//            }
             let x = ( view.frame.size.width / 2.0 ) - ( 50.0 / 2.0 )
             let y = ( view.frame.size.height / 2.0 ) - ( 50.0 / 2.0 )
             let theFrame = CGRect(x: x, y: y, width: CGFloat(50), height: CGFloat(50))
@@ -33,15 +31,14 @@ class ActivityIndicator
         }
     }
     
-    static func stopAnimating()
+    static func stopAnimating(onView view: UIView)
     {
-        DispatchQueue.main.async
-        {
-            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else
-            {
-                print("can not get current view ")
-                return
-            }
+        DispatchQueue.main.async {
+//            guard let view = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.view else
+//            {
+//                print("can not get current view ")
+//                return
+//            }
             
             view.isUserInteractionEnabled = true
             indicator.stopAnimating()

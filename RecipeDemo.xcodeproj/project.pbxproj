@@ -53,6 +53,7 @@
 		BBD1CEF42673A8D8002E5C05 /* SearchVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */; };
 		BBD1CEFA2673BA84002E5C05 /* SearchSuggestionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */; };
 		BBD1CF022673C987002E5C05 /* SearchSuggestionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */; };
+		BBFE000A27385BB900D75C7C /* UIViewController+ EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFE000927385BB900D75C7C /* UIViewController+ EX.swift */; };
 		BC8BA393E25E0EB4AB92134D /* Pods_RecipeDemo_RecipeDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B114756863230146B68F6 /* Pods_RecipeDemo_RecipeDemoUITests.framework */; };
 		CAB0381DB511250E2D9803BD /* Pods_RecipeDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F55A963F3DDDE43DFC09F80 /* Pods_RecipeDemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,7 @@
 		BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVCExtensions.swift; sourceTree = "<group>"; };
 		BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionWorker.swift; sourceTree = "<group>"; };
 		BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionArray.swift; sourceTree = "<group>"; };
+		BBFE000927385BB900D75C7C /* UIViewController+ EX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ EX.swift"; sourceTree = "<group>"; };
 		DF4B431A105D6195776537DB /* Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo-RecipeDemoUITests/Pods-RecipeDemo-RecipeDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DFE2BFFE824198C34088EC4E /* Pods-RecipeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeDemo.debug.xcconfig"; path = "Target Support Files/Pods-RecipeDemo/Pods-RecipeDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,6 +384,7 @@
 				BB2E677526724A6C004B105A /* UIImageViewExtension.swift */,
 				BB2E677626724A6C004B105A /* UIViewExtension.swift */,
 				BB651EF92736CD290079880F /* UITextField+EX.swift */,
+				BBFE000927385BB900D75C7C /* UIViewController+ EX.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				BBD1CF022673C987002E5C05 /* SearchSuggestionArray.swift in Sources */,
 				BB5A69B12677BF6A004227A9 /* RecipeDetailsViewModel.swift in Sources */,
 				BB5A69CF2677CCA5004227A9 /* RecipeDetailsRouter.swift in Sources */,
+				BBFE000A27385BB900D75C7C /* UIViewController+ EX.swift in Sources */,
 				BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */,
 				BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */,
 				BB2E672626722D80004B105A /* CustomLoggerPlugin.swift in Sources */,

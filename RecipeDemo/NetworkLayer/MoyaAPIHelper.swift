@@ -23,26 +23,9 @@ class MoyaAPIHelper<T: TargetType> {
     // MARK: Init
     
     init(type: ServiceType, withLogger: Bool) {
-        let networkActivityClosure: NetworkActivityPlugin.NetworkActivityClosure = {
-            (activity, _) in
-                
-                switch activity {
-                case .began:
-                    ActivityIndicator.startAnimating()
-                    
-                case .ended:
-                    ActivityIndicator.stopAnimating()
-                }
-            }
         
-        var plugins: [PluginType] = []
-        
-        let networkActivityPlugin = NetworkActivityPlugin(networkActivityClosure: networkActivityClosure)
-        plugins.append(networkActivityPlugin)
-        
-        let networkLogger = CustomLoggerPlugin(verbose: withLogger)
-        plugins.append(networkLogger)
-        
+        let plugins: [PluginType] = [CustomLoggerPlugin(verbose: withLogger)]
+    
         let serviceType = type == .production ? MoyaProvider<T>.neverStub : MoyaProvider<T>.immediatelyStub
         
         self.provider = MoyaProvider<T>(stubClosure: serviceType, plugins: plugins)

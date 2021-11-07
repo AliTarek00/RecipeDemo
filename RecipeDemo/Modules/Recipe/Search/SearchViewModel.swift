@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 protocol SearchViewModelProtocol {
+    var isLoading: CurrentValueSubject<Bool, Never> { get }
+    
     var searchKeyword: CurrentValueSubject<String, Never> { set get }
     var searchFilter: CurrentValueSubject<HealthFilter?, Never> { set get }
     var searchResults: CurrentValueSubject<[Recipe], Never> { get }
@@ -23,6 +25,7 @@ protocol SearchViewModelProtocol {
 class SearchViewModel: SearchViewModelProtocol {
     
     // MARK: - Properties
+    
     private let recipeService: RecipeNetworkable
     private let suggestionsWorker: SearchSuggestionWorkerProtocol
     private lazy var from: Int = 0
@@ -32,15 +35,14 @@ class SearchViewModel: SearchViewModelProtocol {
     private lazy var isAPaginationRequest = false
     
     private lazy var subscriptions = Set<AnyCancellable>()
-    private (set) lazy var isLoading: Bool = false
+    
+    private (set) lazy var isLoading = CurrentValueSubject<Bool,Never>(false)
     private (set) lazy var searchResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
     private (set) lazy var nextPageResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
     private (set) lazy var searchSuggestions = CurrentValueSubject<[String],Never>([String]())
     private (set) lazy var errorMessage = CurrentValueSubject<String?,Never>(nil)
-    
     lazy var searchKeyword = CurrentValueSubject<String,Never>("")
     lazy var searchFilter = CurrentValueSubject<HealthFilter?,Never>(nil)
-    //var presenter: SearchPresenterProtocol?
     
     required init(recipeService: RecipeNetworkable = RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorkerProtocol = SearchSuggestionWorker()) {
         self.recipeService = recipeService
@@ -108,21 +110,21 @@ class SearchViewModel: SearchViewModelProtocol {
     
     private func createSearchPublisher()-> AnyPublisher<PagingResponse<Hit>, Error> {
         resetPaginationProperties()
-        isLoading = true
+        isLoading.value = true
         
         let request = SearchRequest(query: searchKeyword.value, filter: searchFilter.value, from: from, to: to)
         return recipeService
             .search(request: request)
         
     }
-        
+    
     func fetchNextPageForSearchResults() {
         print("fetchNextPageForSearchResults")
-        guard hasMore, !isLoading, from + to < totalItems else { return }
+        guard hasMore, !isLoading.value, from + to < totalItems else { return }
         from = to
         to = (from + 10) > totalItems ? (totalItems - from) : (from + 10)
         isAPaginationRequest = true
-        isLoading  = true
+        isLoading.value  = true
         
         let request = SearchRequest(query: searchKeyword.value, filter: searchFilter.value, from: from, to: to)
         recipeService
@@ -133,15 +135,15 @@ class SearchViewModel: SearchViewModelProtocol {
                     self?.errorMessage.value = error.localizedDescription
                 }
             } receiveValue: { [unowned self] (response) in
-              isLoading = false
+                isLoading.value = false
                 setViewModelProperties(response: response)
             }
             .store(in: &subscriptions)
     }
     
     private func handleSeacrhCompletion() {
-       isLoading = false
-       isAPaginationRequest = false
+        isLoading.value = false
+        isAPaginationRequest = false
     }
     
     private func getSearchSuggestions() {
@@ -202,7 +204,6 @@ class SearchViewModel: SearchViewModelProtocol {
 
 // MARK: - Data Converion
 extension SearchViewModel {
-    
     private func getRecipesFrom(hits: [Hit])-> [Recipe] {
         return hits.compactMap{ $0.recipe }
     }
