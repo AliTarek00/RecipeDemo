@@ -60,7 +60,7 @@ extension SearchViewController: UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! SearchTableViewCell
         
-        let recipeViewModel = viewModel.searchResults.value[indexPath.row]
+        let recipeViewModel = viewModel.getCellViewModel(atIndex: indexPath)
         cell.configure(recipeViewModel)
         
         return cell

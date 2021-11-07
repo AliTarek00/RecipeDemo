@@ -10,14 +10,14 @@ import Combine
 
 protocol SearchViewModelProtocol {
     var searchKeyword: CurrentValueSubject<String, Never> { get }
-    var searchFilter: CurrentValueSubject<HealthFilter, Never> { get }
-    var searchResults: CurrentValueSubject<[SearchResultCellViewModel], Never> { get }
-    var nextPageResults: CurrentValueSubject<[SearchResultCellViewModel], Never> { get }
+    var searchFilter: CurrentValueSubject<HealthFilter?, Never> { get }
+    var searchResults: CurrentValueSubject<[Recipe], Never> { get }
+    var nextPageResults: CurrentValueSubject<[Recipe], Never> { get }
     var searchSuggestions: CurrentValueSubject<[String], Never> { get }
-
     var errorMessage: CurrentValueSubject<String?, Never> { get }
     
     func fetchNextPageForSearchResults()
+    func getCellViewModel(atIndex index: IndexPath)->SearchResultCellViewModel
 }
 
 class SearchViewModel: SearchViewModelProtocol {
@@ -33,13 +33,13 @@ class SearchViewModel: SearchViewModelProtocol {
     
     private lazy var subscriptions = Set<AnyCancellable>()
     private (set) lazy var isLoading: Bool = false
-    private (set) lazy var searchResults = CurrentValueSubject<[SearchResultCellViewModel],Never>([SearchResultCellViewModel]())
-    private (set) lazy var nextPageResults = CurrentValueSubject<[SearchResultCellViewModel],Never>([SearchResultCellViewModel]())
+    private (set) lazy var searchResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
+    private (set) lazy var nextPageResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
     private (set) lazy var searchSuggestions = CurrentValueSubject<[String],Never>([String]())
     private (set) lazy var errorMessage = CurrentValueSubject<String?,Never>(nil)
     
     lazy var searchKeyword = CurrentValueSubject<String,Never>("")
-    lazy var searchFilter = CurrentValueSubject<HealthFilter,Never>(.all)
+    lazy var searchFilter = CurrentValueSubject<HealthFilter?,Never>(nil)
     //var presenter: SearchPresenterProtocol?
     
     required init(recipeService: RecipeNetworkable = RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorkerProtocol = SearchSuggestionWorker()) {
@@ -76,6 +76,7 @@ class SearchViewModel: SearchViewModelProtocol {
     private func setupFilterPublisher() {
         searchFilter
             .removeDuplicates()
+            .compactMap{$0}
             .sink{ (_) in
             } receiveValue: { [weak self] (filter) in
                 self?.filterResults(WithFilter: filter)
@@ -162,7 +163,8 @@ class SearchViewModel: SearchViewModelProtocol {
                 self.searchSuggestions.value = suggestions
                 
             case .failure(let error):
-                self.errorMessage.value = error.localizedDescription
+                print(error.localizedDescription)
+                // self.errorMessage.value = error.localizedDescription
             }
         }
     }
@@ -193,14 +195,18 @@ class SearchViewModel: SearchViewModelProtocol {
         self.totalItems = totalItems
         
         let newRecipes = getRecipesFrom(hits: hits)
-        let searchResultsVMs = convertRecipesToSearchResultsViewModels(recipes: newRecipes)
         
         if isAPaginationRequest {
-            let newSearchResults = self.searchResults.value + searchResultsVMs
+            let newSearchResults = self.searchResults.value + newRecipes
             nextPageResults.value = newSearchResults
         } else {
-            searchResults.value = searchResultsVMs
+            searchResults.value = newRecipes
         }
+    }
+    
+    func getCellViewModel(atIndex index: IndexPath) -> SearchResultCellViewModel {
+        let recipe = searchResults.value[index.row]
+        return getViewModelFrom(recipe: recipe)
     }
     
 }
@@ -212,14 +218,11 @@ extension SearchViewModel {
         return hits.compactMap{ $0.recipe }
     }
     
-    private func convertRecipesToSearchResultsViewModels(recipes: [Recipe])-> [SearchResultCellViewModel] {
-        let resultsViewModels = recipes.compactMap { (recipe) -> SearchResultCellViewModel? in
-            let healthLabels = recipe.healthLabels.joined(separator: ", ")
-            let viewModel = SearchResultCellViewModel(imageLink: recipe.image, title: recipe.label, source: recipe.source, healthLabels: healthLabels)
-            
-            return viewModel
-        }
-        return resultsViewModels
+    private func getViewModelFrom(recipe: Recipe)-> SearchResultCellViewModel {
+        let healthLabels = recipe.healthLabels.joined(separator: ", ")
+        let viewModel = SearchResultCellViewModel(imageLink: recipe.image, title: recipe.label, source: recipe.source, healthLabels: healthLabels)
+        
+        return viewModel
     }
     
 }

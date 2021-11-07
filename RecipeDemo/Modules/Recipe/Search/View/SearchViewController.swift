@@ -65,6 +65,8 @@ class SearchViewController: UIViewController {
         
         viewModel?.searchResults
             .receive(on: DispatchQueue.main)
+            .print()
+            .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] _ in
                 self?.refreshSearchOrFilterResults()
             })
@@ -72,6 +74,7 @@ class SearchViewController: UIViewController {
         
         viewModel?.nextPageResults
             .receive(on: DispatchQueue.main)
+            .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] _ in
                 self?.refreshTableView()
             })
@@ -79,6 +82,7 @@ class SearchViewController: UIViewController {
         
         viewModel?.searchSuggestions
             .receive(on: DispatchQueue.main)
+            .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] suggestions in
                 self?.searchBar.filterStrings(suggestions)
             })
