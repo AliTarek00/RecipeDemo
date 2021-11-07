@@ -20,7 +20,7 @@ class SearchBuilder {
         view.viewModel = interactor
         view.router = router
         router.viewController = view
-        presenter.view = view
+        //presenter.view = view
         //interactor.presenter = presenter
     }
 }

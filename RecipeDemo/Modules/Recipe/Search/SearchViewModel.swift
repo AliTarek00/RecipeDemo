@@ -10,15 +10,14 @@ import Combine
 
 protocol SearchViewModelProtocol {
     var searchKeyword: CurrentValueSubject<String, Never> { get }
+    var searchFilter: CurrentValueSubject<HealthFilter, Never> { get }
     var searchResults: CurrentValueSubject<[SearchResultCellViewModel], Never> { get }
     var nextPageResults: CurrentValueSubject<[SearchResultCellViewModel], Never> { get }
     var searchSuggestions: CurrentValueSubject<[String], Never> { get }
-    var searchFilter: CurrentValueSubject<HealthFilter, Never> { get }
+
     var errorMessage: CurrentValueSubject<String?, Never> { get }
     
     func fetchNextPageForSearchResults()
-    func fetchSearchSuggestions()
-    func saveSearchSuggestions()
 }
 
 class SearchViewModel: SearchViewModelProtocol {
@@ -49,6 +48,10 @@ class SearchViewModel: SearchViewModelProtocol {
         self.getSearchSuggestions()
         
         setupPublishers()
+    }
+    
+    deinit {
+        suggestionsWorker.saveSuggestions(searchSuggestions.value)
     }
     
     // MARK: - Methods
@@ -83,7 +86,6 @@ class SearchViewModel: SearchViewModelProtocol {
         
         if !searchSuggestions.value.contains(query) {
             searchSuggestions.value = suggestionsWorker.addNewSuggestion(query)
-            presenter?.interactor(self, didFetchSearchSuggestions: searchSuggestions.value)
         }
         
         resetPaginationProperties()
@@ -95,7 +97,6 @@ class SearchViewModel: SearchViewModelProtocol {
             .sink { [weak self] (completion) in
                 self?.isLoading = false
                 self?.isAPaginationRequest = false
-                self?.searchKeyword.value = query
                 
                 if case .failure(let error) = completion {
                     self?.errorMessage.value = error.localizedDescription
@@ -153,15 +154,10 @@ class SearchViewModel: SearchViewModelProtocol {
             .store(in: &subscriptions)
     }
     
-    func saveSearchSuggestions() {
-        suggestionsWorker.saveSuggestions(searchSuggestions.value)
-    }
-    
     private func getSearchSuggestions() {
         suggestionsWorker.fetchSuggestions {
             [unowned self] (result: Result<[String], Error>) in
-            switch result
-            {
+            switch result {
             case .success(let suggestions):
                 self.searchSuggestions.value = suggestions
                 
@@ -185,7 +181,7 @@ class SearchViewModel: SearchViewModelProtocol {
         }
         
         guard !hits.isEmpty else {
-            // don't show alert error ife in a pagination request and there is no more items
+            // don't show alert error if in a pagination request and there is no more items
             if isAPaginationRequest { return }
             self.errorMessage.value = SearchError.emptySearch.localizedDescription
             return

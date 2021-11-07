@@ -284,13 +284,12 @@
 		BB2E673E2672410A004B105A /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				BB2E67CF26726162004B105A /* ViewController */,
+				BB2E67CF26726162004B105A /* View */,
 				BB5A69B82677BFD8004227A9 /* Model */,
-				BB7AA1622672794D006872FD /* View */,
-				BB2E67D026726173004B105A /* ViewModel */,
-				BB2E67D12672617F004B105A /* Presenter */,
-				BB2E67D32672619B004B105A /* Router */,
-				BBD1CEF82673B9EB002E5C05 /* Worker */,
+				BB2E67B826725E4E004B105A /* SearchViewModel.swift */,
+				BB2E67B326725DEE004B105A /* SearchPresenter.swift */,
+				BB2E67BD26725E82004B105A /* SearchRouter.swift */,
+				BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */,
 				BB2E67C526725ED1004B105A /* SearchBuilder.swift */,
 			);
 			path = Search;
@@ -399,37 +398,14 @@
 			path = StoryBoards;
 			sourceTree = "<group>";
 		};
-		BB2E67CF26726162004B105A /* ViewController */ = {
+		BB2E67CF26726162004B105A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BB7AA1622672794D006872FD /* Cell */,
 				BB2E67AE26725DD3004B105A /* SearchViewController.swift */,
 				BBD1CEF32673A8D8002E5C05 /* SearchVCExtensions.swift */,
 			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		BB2E67D026726173004B105A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				BB2E67B826725E4E004B105A /* SearchViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		BB2E67D12672617F004B105A /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				BB2E67B326725DEE004B105A /* SearchPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		BB2E67D32672619B004B105A /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				BB2E67BD26725E82004B105A /* SearchRouter.swift */,
-			);
-			path = Router;
+			path = View;
 			sourceTree = "<group>";
 		};
 		BB5A696126778D2D004227A9 /* Presenter */ = {
@@ -481,20 +457,12 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		BB7AA1622672794D006872FD /* View */ = {
+		BB7AA1622672794D006872FD /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				BB7AA16326727974006872FD /* SearchTableViewCell.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		BBD1CEF82673B9EB002E5C05 /* Worker */ = {
-			isa = PBXGroup;
-			children = (
-				BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */,
-			);
-			path = Worker;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		BBDB91ED267CC0EF00C64496 /* Search */ = {

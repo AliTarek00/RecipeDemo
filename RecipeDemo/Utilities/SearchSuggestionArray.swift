@@ -30,6 +30,9 @@ public struct SearchSuggestionArray<T>
     /// This function add new element at the first of array and if the currentItems is equal to array max size (in our case max size is 10 elements) we remove last element (the oldest search suggestion) to make space for the new element.
     public mutating func addAndReturnArray(_ element: T) -> [T]
     {
+        guard !array.contains(element) else {
+            return array.compactMap{$0}
+        }
         if currentItems < maximumSize
         {
             currentItems += 1

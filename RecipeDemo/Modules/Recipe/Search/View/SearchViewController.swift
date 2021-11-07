@@ -9,21 +9,15 @@ import UIKit
 import SearchTextField
 import Combine
 
-protocol SearchViewProtocol: AnyObject
-{
+protocol SearchViewProtocol: AnyObject {
     var viewModel: SearchViewModelProtocol! { get set }
     var router: SearchRouterProtocol! { get set }
     
     // Update UI with value returned.
-    func displaySearchOrFilterResults(_ recipes: [SearchResultCellViewModel])
-    func displaySearchSuggestions(_ suggestions: [String])
-    func displayNextPageResults(_ recipes: [SearchResultCellViewModel], indexPaths: [IndexPath])
     func displayError(WithMessage message: String)
-    
 }
 
-class SearchViewController: UIViewController
-{
+class SearchViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var searchBar: SearchTextField!
@@ -57,7 +51,6 @@ class SearchViewController: UIViewController
         setupTableView()
         setupSearchBar()
         setupGestures()
-        viewModel?.fetchSearchSuggestions()
         bindUIWithViewMode()
     }
     
@@ -100,15 +93,13 @@ class SearchViewController: UIViewController
             .store(in: &subscribtions)
     }
     
-    private func setupTableView()
-    {
+    private func setupTableView() {
         resultsTableView.tableFooterView = UIView() // this to remove empty cells in case samll number of results
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
     }
     
-    private func setupSearchBar()
-    {
+    private func setupSearchBar() {
         searchBar.delegate = self
         searchBar.startVisible = true
         searchBar.theme.bgColor = .white
@@ -117,8 +108,7 @@ class SearchViewController: UIViewController
         searchBar.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
     }
     
-    private func setupGestures()
-    {
+    private func setupGestures() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
         tap.cancelsTouchesInView = false;
         self.view.addGestureRecognizer(tap)
