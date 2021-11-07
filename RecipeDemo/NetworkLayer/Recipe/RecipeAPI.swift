@@ -54,8 +54,8 @@ extension RecipeAPI: TargetType {
         switch self {
         case let .search(request):
             var parameters = ["app_id": AppAuthKeys.appId, "app_key": AppAuthKeys.appKey, "q": request.query, "from": request.from, "to": request.to] as [String : Any]
-            if let healthFilter = request.filter {
-                parameters["health"] = healthFilter
+            if let healthFilter = request.filter, healthFilter != .all {
+                parameters["health"] = healthFilter.rawValue
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }

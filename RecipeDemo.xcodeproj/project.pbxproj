@@ -32,7 +32,6 @@
 		BB2E677B26724A6D004B105A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E677626724A6C004B105A /* UIViewExtension.swift */; };
 		BB2E67A626725D6E004B105A /* RecipeSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2E67A526725D6E004B105A /* RecipeSearch.storyboard */; };
 		BB2E67AF26725DD3004B105A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67AE26725DD3004B105A /* SearchViewController.swift */; };
-		BB2E67B426725DEE004B105A /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67B326725DEE004B105A /* SearchPresenter.swift */; };
 		BB2E67B926725E4E004B105A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67B826725E4E004B105A /* SearchViewModel.swift */; };
 		BB2E67BE26725E82004B105A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67BD26725E82004B105A /* SearchRouter.swift */; };
 		BB2E67C626725ED1004B105A /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E67C526725ED1004B105A /* SearchBuilder.swift */; };
@@ -113,7 +112,6 @@
 		BB2E677626724A6C004B105A /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		BB2E67A526725D6E004B105A /* RecipeSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecipeSearch.storyboard; sourceTree = "<group>"; };
 		BB2E67AE26725DD3004B105A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		BB2E67B326725DEE004B105A /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		BB2E67B826725E4E004B105A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		BB2E67BD26725E82004B105A /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		BB2E67C526725ED1004B105A /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 				BB2E67CF26726162004B105A /* View */,
 				BB5A69B82677BFD8004227A9 /* Model */,
 				BB2E67B826725E4E004B105A /* SearchViewModel.swift */,
-				BB2E67B326725DEE004B105A /* SearchPresenter.swift */,
 				BB2E67BD26725E82004B105A /* SearchRouter.swift */,
 				BBD1CEF92673BA84002E5C05 /* SearchSuggestionWorker.swift */,
 				BB2E67C526725ED1004B105A /* SearchBuilder.swift */,
@@ -724,7 +721,6 @@
 			files = (
 				BB2E677826724A6D004B105A /* UIColorExtension.swift in Sources */,
 				BB2E673426722EAE004B105A /* RecipeNetworkManger.swift in Sources */,
-				BB2E67B426725DEE004B105A /* SearchPresenter.swift in Sources */,
 				BB5A696626778D86004227A9 /* RecipeDetailsViewController.swift in Sources */,
 				BB651EF8273698B00079880F /* SearchRequest.swift in Sources */,
 				BB2E6755267245F1004B105A /* Hit.swift in Sources */,

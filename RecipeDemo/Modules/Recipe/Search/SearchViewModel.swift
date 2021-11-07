@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol SearchViewModelProtocol {
-    var searchKeyword: CurrentValueSubject<String, Never> { get }
-    var searchFilter: CurrentValueSubject<HealthFilter?, Never> { get }
+    var searchKeyword: CurrentValueSubject<String, Never> { set get }
+    var searchFilter: CurrentValueSubject<HealthFilter?, Never> { set get }
     var searchResults: CurrentValueSubject<[Recipe], Never> { get }
     var nextPageResults: CurrentValueSubject<[Recipe], Never> { get }
     var searchSuggestions: CurrentValueSubject<[String], Never> { get }
@@ -21,7 +21,7 @@ protocol SearchViewModelProtocol {
 }
 
 class SearchViewModel: SearchViewModelProtocol {
-
+    
     // MARK: - Properties
     private let recipeService: RecipeNetworkable
     private let suggestionsWorker: SearchSuggestionWorkerProtocol
@@ -65,10 +65,23 @@ class SearchViewModel: SearchViewModelProtocol {
         searchKeyword
             .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .removeDuplicates()
-            .filter { $0.isNotEmptyOrSpaces()}
-            .sink{ (_) in
-            } receiveValue: { [weak self] (keyword) in
-                self?.search(WithKeyowrd: keyword)
+            .filter{$0.isNotEmptyOrSpaces()}
+            .map { [unowned self] (keyword)-> AnyPublisher<PagingResponse<Hit>, Error> in
+                if !searchSuggestions.value.contains(keyword) {
+                    searchSuggestions.value = suggestionsWorker.addNewSuggestion(keyword)
+                }
+                return self.createSearchPublisher()
+            }
+            .setFailureType(to: Error.self) // this to make switchToLatest works in ios 13
+            .switchToLatest()
+            .sink{ [unowned self] (completion) in
+                handleSeacrhCompletion()
+                if case .failure(let error) = completion {
+                    errorMessage.value = error.localizedDescription
+                }
+            } receiveValue: { [unowned self] (response) in
+                handleSeacrhCompletion()
+                setViewModelProperties(response: response)
             }.store(in: &subscriptions)
         
     }
@@ -77,82 +90,58 @@ class SearchViewModel: SearchViewModelProtocol {
         searchFilter
             .removeDuplicates()
             .compactMap{$0}
-            .sink{ (_) in
-            } receiveValue: { [weak self] (filter) in
-                self?.filterResults(WithFilter: filter)
+            .map{ [unowned self] (filter)-> AnyPublisher<PagingResponse<Hit>, Error> in
+                return self.createSearchPublisher()
+            }
+            .setFailureType(to: Error.self) // this to make switchToLatest works in ios 13
+            .switchToLatest()
+            .sink{ [unowned self] (completion) in
+                handleSeacrhCompletion()
+                if case .failure(let error) = completion {
+                    errorMessage.value = error.localizedDescription
+                }
+            } receiveValue: { [unowned self] (response) in
+                handleSeacrhCompletion()
+                setViewModelProperties(response: response)
             }.store(in: &subscriptions)
     }
     
-    private func search(WithKeyowrd query: String) {
-        
-        if !searchSuggestions.value.contains(query) {
-            searchSuggestions.value = suggestionsWorker.addNewSuggestion(query)
-        }
-        
+    private func createSearchPublisher()-> AnyPublisher<PagingResponse<Hit>, Error> {
         resetPaginationProperties()
         isLoading = true
         
-        let request = SearchRequest(query: query, filter: searchFilter.value, from: from, to: to)
-        recipeService
+        let request = SearchRequest(query: searchKeyword.value, filter: searchFilter.value, from: from, to: to)
+        return recipeService
             .search(request: request)
-            .sink { [weak self] (completion) in
-                self?.isLoading = false
-                self?.isAPaginationRequest = false
-                
-                if case .failure(let error) = completion {
-                    self?.errorMessage.value = error.localizedDescription
-                }
-                
-            } receiveValue: { [weak self] (response) in
-                self?.setInteractorProperties(response: response)
-            }
-            .store(in: &subscriptions)
-    }
-    
-    private func filterResults(WithFilter filter: HealthFilter) {
-        let selectedFilter = filter == .all ? nil : filter
-        resetPaginationProperties()
-        isLoading = false
         
-        let request = SearchRequest(query: searchKeyword.value, filter: selectedFilter, from: from, to: to)
-        recipeService
-            .search(request: request)
-            .sink { [weak self] (completion) in
-                self?.isLoading = false
-                self?.isAPaginationRequest = false
-                
-                if case .failure(let error) = completion {
-                    self?.errorMessage.value = error.localizedDescription
-                }
-                
-            } receiveValue: { [weak self] (response) in
-                self?.setInteractorProperties(response: response)
-            }
-            .store(in: &subscriptions)
     }
-    
+        
     func fetchNextPageForSearchResults() {
+        print("fetchNextPageForSearchResults")
         guard hasMore, !isLoading, from + to < totalItems else { return }
         from = to
         to = (from + 10) > totalItems ? (totalItems - from) : (from + 10)
         isAPaginationRequest = true
-        isLoading = false
+        isLoading  = true
         
         let request = SearchRequest(query: searchKeyword.value, filter: searchFilter.value, from: from, to: to)
         recipeService
             .search(request: request)
             .sink { [weak self] (completion) in
-                self?.isLoading = false
-                self?.isAPaginationRequest = false
-                
-                if case .failure = completion {
-                    print("failure in pagination")
+                self?.handleSeacrhCompletion()
+                if case .failure(let error) = completion {
+                    self?.errorMessage.value = error.localizedDescription
                 }
-                
-            } receiveValue: { [weak self] (response) in
-                self?.setInteractorProperties(response: response)
+            } receiveValue: { [unowned self] (response) in
+              isLoading = false
+                setViewModelProperties(response: response)
             }
             .store(in: &subscriptions)
+    }
+    
+    private func handleSeacrhCompletion() {
+       isLoading = false
+       isAPaginationRequest = false
     }
     
     private func getSearchSuggestions() {
@@ -176,7 +165,7 @@ class SearchViewModel: SearchViewModelProtocol {
         totalItems = 0
     }
     
-    private func setInteractorProperties(response: PagingResponse<Hit>) {
+    private func setViewModelProperties(response: PagingResponse<Hit>) {
         guard let from = response.from, let to = response.to, let more = response.more, let totalItems = response.totalItems, let hits = response.data else {
             self.errorMessage.value = SearchError.invalidSearchKeyowrd.localizedDescription
             return
