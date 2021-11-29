@@ -51,10 +51,10 @@ class SearchViewController: UIViewController {
         setupTableView()
         setupSearchBar()
         setupGestures()
-        bindUIWithViewMode()
+        bindUIWithViewModel()
     }
     
-    private func bindUIWithViewMode() {
+    private func bindUIWithViewModel() {
         searchBar
             .textPublisher
             .receive(on: RunLoop.main)
@@ -63,18 +63,15 @@ class SearchViewController: UIViewController {
             })
             .store(in: &subscribtions)
         
-        viewModel.searchResults
+        viewModel.searchResultsFetched
             .receive(on: DispatchQueue.main)
-            .print()
-            .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] _ in
                 self?.refreshSearchOrFilterResults()
             })
             .store(in: &subscribtions)
         
-        viewModel.nextPageResults
+        viewModel.nextPageFetched
             .receive(on: DispatchQueue.main)
-            .filter{!$0.isEmpty}
             .sink(receiveValue: { [weak self] _ in
                 self?.refreshTableView()
             })

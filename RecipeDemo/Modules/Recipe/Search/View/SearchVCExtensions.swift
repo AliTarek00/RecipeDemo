@@ -19,29 +19,22 @@ extension SearchViewController: UITextFieldDelegate {
 
 // MARK: - Navigation
 
-extension SearchViewController
-{
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+extension SearchViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router?.passDataToNextScene(segue)
     }
-
 }
 
 // MARK: - UITableViewDelegate
 
-extension SearchViewController: UITableViewDelegate
-{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         router?.navigateToRecipeDetails()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    {
-        if indexPath.row == viewModel.searchResults.value.count - 2
-        {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.searchResults.value.count - 1 {
             viewModel.fetchNextPageForSearchResults()
         }
     }
@@ -49,15 +42,12 @@ extension SearchViewController: UITableViewDelegate
 
 // MARK: - UITableViewDataSource
 
-extension SearchViewController: UITableViewDataSource
-{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.searchResults.value.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! SearchTableViewCell
         
         let recipeViewModel = viewModel.getCellViewModel(atIndex: indexPath)

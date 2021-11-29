@@ -8,7 +8,7 @@
 import Moya
 import Combine
 
-class RecipeNetworkManager: RecipeNetworkable {
+class RecipeNetworkManager: RecipeService {
     // MARK: Properties
     
     private let moyaAPIHelper: MoyaAPIHelper<RecipeAPI>

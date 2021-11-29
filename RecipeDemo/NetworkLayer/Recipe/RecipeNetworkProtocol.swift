@@ -8,9 +8,8 @@
 import Foundation
 import Combine
 
-protocol RecipeNetworkable: AnyObject {
+protocol RecipeService: AnyObject {
     
     // MARK: Methods
-
     func search(request: SearchRequest)-> AnyPublisher<PagingResponse<Hit>, Error>
 }

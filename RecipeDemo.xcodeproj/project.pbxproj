@@ -46,7 +46,6 @@
 		BB5A69CF2677CCA5004227A9 /* RecipeDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A69CE2677CCA5004227A9 /* RecipeDetailsRouter.swift */; };
 		BB651EF8273698B00079880F /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB651EF7273698B00079880F /* SearchRequest.swift */; };
 		BB651EFA2736CD290079880F /* UITextField+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB651EF92736CD290079880F /* UITextField+EX.swift */; };
-		BB7AA15E267273C6006872FD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA15D267273C6006872FD /* Helper.swift */; };
 		BB7AA16426727974006872FD /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16326727974006872FD /* SearchTableViewCell.swift */; };
 		BB7AA16C26727B16006872FD /* SearchResultCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA16B26727B16006872FD /* SearchResultCellViewModel.swift */; };
 		BB7AA18726729D1F006872FD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AA18626729D1F006872FD /* Enums.swift */; };
@@ -127,7 +126,6 @@
 		BB5A69CE2677CCA5004227A9 /* RecipeDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsRouter.swift; sourceTree = "<group>"; };
 		BB651EF7273698B00079880F /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		BB651EF92736CD290079880F /* UITextField+EX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+EX.swift"; sourceTree = "<group>"; };
-		BB7AA15D267273C6006872FD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BB7AA16326727974006872FD /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		BB7AA16B26727B16006872FD /* SearchResultCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellViewModel.swift; sourceTree = "<group>"; };
 		BB7AA18626729D1F006872FD /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -360,7 +358,6 @@
 		BB2E67692672497A004B105A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				BB7AA15D267273C6006872FD /* Helper.swift */,
 				BBD1CF012673C987002E5C05 /* SearchSuggestionArray.swift */,
 				BB2E675926724875004B105A /* View */,
 				BB2E676A26724985004B105A /* Extensions */,
@@ -728,7 +725,6 @@
 				BB651EF8273698B00079880F /* SearchRequest.swift in Sources */,
 				BB2E6755267245F1004B105A /* Hit.swift in Sources */,
 				BB2E677A26724A6D004B105A /* UIImageViewExtension.swift in Sources */,
-				BB7AA15E267273C6006872FD /* Helper.swift in Sources */,
 				BB2E66C126721B67004B105A /* AppDelegate.swift in Sources */,
 				BB2E676F26724A58004B105A /* StringExtension.swift in Sources */,
 				BB2E6764267248E4004B105A /* DesignableView.swift in Sources */,

@@ -14,7 +14,8 @@ protocol SearchViewModelProtocol {
     var searchKeyword: CurrentValueSubject<String, Never> { set get }
     var searchFilter: CurrentValueSubject<HealthFilter?, Never> { set get }
     var searchResults: CurrentValueSubject<[Recipe], Never> { get }
-    var nextPageResults: CurrentValueSubject<[Recipe], Never> { get }
+    var searchResultsFetched: PassthroughSubject<Bool, Never> { get }
+    var nextPageFetched: PassthroughSubject<Bool, Never> { get }
     var searchSuggestions: CurrentValueSubject<[String], Never> { get }
     var errorMessage: CurrentValueSubject<String?, Never> { get }
     
@@ -26,7 +27,7 @@ class SearchViewModel: SearchViewModelProtocol {
     
     // MARK: - Properties
     
-    private let recipeService: RecipeNetworkable
+    private let recipeService: RecipeService
     private let suggestionsWorker: SearchSuggestionWorkerProtocol
     private lazy var from: Int = 0
     private lazy var to: Int = 10
@@ -38,13 +39,14 @@ class SearchViewModel: SearchViewModelProtocol {
     
     private (set) lazy var isLoading = CurrentValueSubject<Bool,Never>(false)
     private (set) lazy var searchResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
-    private (set) lazy var nextPageResults = CurrentValueSubject<[Recipe],Never>([Recipe]())
+    private (set) lazy var searchResultsFetched = PassthroughSubject<Bool,Never>()
+    private (set) lazy var nextPageFetched = PassthroughSubject<Bool,Never>()
     private (set) lazy var searchSuggestions = CurrentValueSubject<[String],Never>([String]())
     private (set) lazy var errorMessage = CurrentValueSubject<String?,Never>(nil)
     lazy var searchKeyword = CurrentValueSubject<String,Never>("")
     lazy var searchFilter = CurrentValueSubject<HealthFilter?,Never>(nil)
     
-    required init(recipeService: RecipeNetworkable = RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorkerProtocol = SearchSuggestionWorker()) {
+    required init(recipeService: RecipeService = RecipeNetworkManager(), suggestionsWorker: SearchSuggestionWorkerProtocol = SearchSuggestionWorker()) {
         self.recipeService = recipeService
         self.suggestionsWorker = suggestionsWorker
         self.getSearchSuggestions()
@@ -119,7 +121,6 @@ class SearchViewModel: SearchViewModelProtocol {
     }
     
     func fetchNextPageForSearchResults() {
-        print("fetchNextPageForSearchResults")
         guard hasMore, !isLoading.value, from + to < totalItems else { return }
         from = to
         to = (from + 10) > totalItems ? (totalItems - from) : (from + 10)
@@ -188,10 +189,12 @@ class SearchViewModel: SearchViewModelProtocol {
         let newRecipes = getRecipesFrom(hits: hits)
         
         if isAPaginationRequest {
-            let newSearchResults = self.searchResults.value + newRecipes
-            nextPageResults.value = newSearchResults
+            let newSearchResults = searchResults.value + newRecipes
+            searchResults.value = newSearchResults
+            nextPageFetched.send(true)
         } else {
             searchResults.value = newRecipes
+            searchResultsFetched.send(true)
         }
     }
     
