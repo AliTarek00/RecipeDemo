@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @available(iOS 11.0, *)
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool
-    {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return false
     }
 }
