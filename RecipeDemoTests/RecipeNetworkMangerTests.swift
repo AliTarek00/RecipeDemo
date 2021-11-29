@@ -32,7 +32,7 @@ class RecipeDemoTests: XCTestCase
         let expectedNumberOSearchfResults = 1
         var exactNumberOfSearchResults: Int?
         let request = SearchRequest(query: "chiken", filter: nil, from: 0, to: 1)
-        let _ = networkManager.search(request: request)
+        _ = networkManager.search(request: request)
             .sink { _ in
             } receiveValue: { response in
                 exactNumberOfSearchResults = response.data?.count ?? 0

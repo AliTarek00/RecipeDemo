@@ -244,7 +244,6 @@
 			children = (
 				BB2E672526722D80004B105A /* CustomLoggerPlugin.swift */,
 				BB19953D267AAC3800787376 /* MoyaAPIHelper.swift */,
-				BB199535267A997300787376 /* Stub */,
 				BB2E672A26722D9D004B105A /* Recipe */,
 			);
 			path = NetworkLayer;
@@ -465,6 +464,7 @@
 		BBDB91ED267CC0EF00C64496 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				BB199535267A997300787376 /* Stub */,
 			);
 			path = Search;
 			sourceTree = "<group>";
