@@ -31,13 +31,12 @@ class RecipeDemoTests: XCTestCase
     {
         let expectedNumberOSearchfResults = 1
         var exactNumberOfSearchResults: Int?
-        
-        networkManager.search(query: "chiken", filter: nil, from: 0, to: 1) { result in
-            if case .success(let response) = result
-            {
+        let request = SearchRequest(query: "chiken", filter: nil, from: 0, to: 1)
+        let _ = networkManager.search(request: request)
+            .sink { _ in
+            } receiveValue: { response in
                 exactNumberOfSearchResults = response.data?.count ?? 0
             }
-        }
         
         let message = "expected: \(expectedNumberOSearchfResults), exact: \(String(describing: exactNumberOfSearchResults))"
         XCTAssert(expectedNumberOSearchfResults == exactNumberOfSearchResults, message)
